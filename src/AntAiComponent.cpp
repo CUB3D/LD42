@@ -8,15 +8,26 @@
 #include "SharedVariable.h"
 #include "Scene/Scene.h"
 #include "AntAiComponent.h"
+#include "math.h"
+#include "TowerHealthBar.h"
 
 void AntAiComponent::update(Unknown::Entity &ent) {
     auto scene = Unknown::getUnknown()->globalSceneManager.getScene<Unknown::Scene>();
-    for(auto& obj : scene->getObjects<Unknown::Entity>("asdf")) {
+    float minDist(-1);
+    std::shared_ptr<Unknown::Entity> TargetObj;
+    for(auto& obj : scene->getObjects<Unknown::Entity>("TowerBody")) {
         // Get the component etc
-        auto comp = obj->getComponent<AntAiComponent>();
+        float dist = sqrt(pow(obj->position.x - ent.position.x,2) + pow(obj->position.x - ent.position.y,2));
+        if (dist < minDist and minDist != -1) {
+            minDist = dist;
+            TargetObj = obj;
+        }
+    }
+    if (TargetObj != NULL) {
+        TowerHealthBar targetBar = *TargetObj->getComponent<TowerHealthBar>();
+        targetBar.health -= rate;
     }
 }
-
-AntAiComponent::AntAiComponent(struct level leve) : curlvl(leve) {
+AntAiComponent::AntAiComponent(struct level leve,int rate) : curlvl(leve), rate(rate){
 
 }

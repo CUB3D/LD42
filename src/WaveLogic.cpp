@@ -24,7 +24,7 @@ void WaveLogic::update(level level, Scene &scene) {
             auto en = Loader::loadEntityAt("Entities/Ant.json", scene, level.spawnPos.x, level.spawnPos.y);
             en->components.push_back(std::make_shared<PathFollowerComponent>(level));
             en->components.push_back(std::make_shared<HealthBar>());
-            en->components.push_back(std::make_shared<AntAiComponent>(level));
+            en->components.push_back(std::make_shared<AntAiComponent>(level,0.1));
             scene.addObject(en);
         }
 
