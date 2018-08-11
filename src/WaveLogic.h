@@ -18,6 +18,8 @@ public:
     int currentWavePosition;
     int currentWave;
 
+    WaveLogic();
+
     void update(level level, Scene &scene);
 };
 
