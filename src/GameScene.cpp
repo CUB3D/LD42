@@ -14,6 +14,7 @@
 #include "TowerHealthBar.h"
 #include "Font.h"
 #include "Sounds.h"
+#include "TurretAiComponent.h"
 
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
@@ -67,6 +68,7 @@ void GameScene::onClick(MouseEvent evnt) {
 
                     // gun
                     auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
+                    b->components.push_back(std::make_shared<TurretAiComponent>(currentLevel, 0.1));
                     b->angle = l.angle;
                     this->addObject(b);
                     // Add the tower
@@ -157,6 +159,18 @@ void GameScene::update() {
         e.edit = true;
 
     logic.update(currentLevel, *this);
+
+    bool allAntsDead = true;
+    for(auto& ant : this->getObjects<Unknown::Entity>("Ant")) {
+        if(ant->enabled) {
+            allAntsDead = false;
+            break;
+        }
+    }
+
+    if(logic.doneSpawning && allAntsDead) {
+        advanceLevel();
+    }
 
     this->e.update();
 }
