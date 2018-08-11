@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 #---- \/ CHANGE THIS \/ ----
 
-set(UK_DIR "C:\\\\Users\\\\Callum\\\\Desktop\\\\Unknown")
+set(UK_DIR "/home/cub3d/Development/git/Unknown-1.0-CPP")
 
 #---- \/ DONT CHANGE THIS \/ ----
 
