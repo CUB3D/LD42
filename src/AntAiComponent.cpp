@@ -35,9 +35,11 @@ void AntAiComponent::update(Unknown::Entity &ent) {
     }
     if (TargetObj) {
         auto targetBar = TargetObj->getComponent<TowerHealthBar>();
-        targetBar->health -= rate;
-        // If attacking then they should stop moving
-        pathingcomp->stopped = true;
+        if(targetBar) {
+            targetBar->health -= rate;
+            // If attacking then they should stop moving
+            pathingcomp->stopped = true;
+        }
     } else {
         pathingcomp->stopped = false;
     }
