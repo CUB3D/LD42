@@ -50,10 +50,10 @@ void GameScene::onClick(MouseEvent evnt) {
     for(auto& l : this->currentLevel.elements) {
         if(x > l.x && x < l.x + 64) {
             if(y > l.y && y < l.y + 16) {
-                auto a = UK_LOAD_ENTITY_AT("Entities/Tower2.json", l.x, l.y - 91);
+                auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
                 a->angle = l.angle;
                 this->addObject(a);
-                auto b = UK_LOAD_ENTITY_AT("Entities/Tower3.json", l.x - 16, l.y - 91);
+                auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
                 b->angle = l.angle;
                 this->addObject(b);
             }
@@ -111,7 +111,7 @@ void GameScene::loadLevel() {
 
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
-            auto ent = UK_LOAD_ENTITY_AT("Entities/Tower1.json", element.x, element.y);
+            auto ent = UK_LOAD_ENTITY_AT("Entities/Tower_Base.json", element.x, element.y);
             ent->angle = element.angle;
             this->addObject(ent);
         }
