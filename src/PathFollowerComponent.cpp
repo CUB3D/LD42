@@ -47,6 +47,9 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
         if(this->currentNodeIndex == curlvl.pathingNodes.size()) {
             this->speed = 0;
             *Unknown::getUnknown()->variablelookup["health"] = Unknown::getUnknown()->variablelookup["health"]->operator double() - 1;
+            if(Unknown::getUnknown()->variablelookup["health"]->operator double() == 0) {
+                UK_LOAD_SCENE("Fail");
+            }
         }
     }
 }
