@@ -16,7 +16,6 @@ using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
 //TODO: load next level when this one is done
-//TODO: enemies kill
 // TODO: kill enemies
 //TODO: turrets can be attacked
 //TODO: destroyed turret

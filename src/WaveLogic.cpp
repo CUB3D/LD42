@@ -22,6 +22,11 @@ void WaveLogic::update(level level, Scene &scene) {
             spawnTimer.timerSpeed = level.waves[currentWave++].delay;
             // Reset spawn count
             currentWavePosition = 0;
+
+            if(currentWave == level.waves.size()) {
+                printf("Load next level");
+                this->spawnTimer.timerSpeed = 99999999;
+            }
         }
     }
 }
