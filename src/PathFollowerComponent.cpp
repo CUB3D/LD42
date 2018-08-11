@@ -45,7 +45,7 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
 
         // If we just passed the last node we have reached end of path
         if(this->currentNodeIndex == curlvl.pathingNodes.size()) {
-            ent.enabled=false;
+            ent.queueDisable();
             *Unknown::getUnknown()->variablelookup["health"] = Unknown::getUnknown()->variablelookup["health"]->operator double() - 1;
             if(Unknown::getUnknown()->variablelookup["health"]->operator double() == 0) {
                 UK_LOAD_SCENE("Fail");

@@ -6,6 +6,8 @@
 #include "Scene/Scene.h"
 #include "Loader.h"
 #include "PathFollowerComponent.h"
+#include "HealthBar.h"
+
 
 void WaveLogic::update(level level, Scene &scene) {
     if(spawnTimer.isTickComplete()) { // Time to spawn new enemy
@@ -14,6 +16,7 @@ void WaveLogic::update(level level, Scene &scene) {
         currentWavePosition++;
         auto en = Loader::loadEntityAt("Entities/Ant.json", scene, level.spawnPos.x, level.spawnPos.y);
         en->components.push_back(std::make_shared<PathFollowerComponent>(level));
+        en->components.push_back(std::make_shared<HealthBar>());
         scene.addObject(en);
 
         // If this wave is done
