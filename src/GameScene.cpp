@@ -146,7 +146,9 @@ void GameScene::render() const {
 
     this->e.render();
 
-    for(auto& tower : getObjects<IRenderable>("Tower")) {
+
+    // Rerender on the front
+    for(auto& tower : getObjects<IRenderable>("TowerBody")) {
         tower->render(0, 0);
     }
 

@@ -15,7 +15,7 @@
 void AntAiComponent::update(Unknown::Entity &ent) {
     auto pathingcomp = ent.getComponent<PathFollowerComponent>();
 
-    double MAX_DIST = 300;
+    double MAX_DIST = 100;
 
     auto towers = Unknown::getUnknown()->globalSceneManager.getScene<Unknown::Scene>()->getObjects<Unknown::Entity>("TowerBody");
 

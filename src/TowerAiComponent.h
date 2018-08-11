@@ -10,9 +10,9 @@
 
 class TowerAiComponent : public Unknown::Component {
 public:
-    TowerAiComponent( double rate, int range);
+    TowerAiComponent( double rate, double range);
     double rate;
-    int range;
+    double range;
 
     virtual void update(Unknown::Entity& ent) override;
 };
