@@ -1,0 +1,11 @@
+{
+	"Tag": "BG",
+	"Width": 10,
+	"Height":  10,
+	"Components": {
+		"BRender": {
+			"Type": "ImageRenderer",
+			"File": "res/Backgrounds/1.png",
+		}
+	}
+}
