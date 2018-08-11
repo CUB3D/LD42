@@ -57,11 +57,18 @@ endif()
 #TODO: Add this back in when cmake 3.12 is available
 
 if(UNIX)
-find_package(Py3)
-	if(Py3_FOUND)
-		message("Python found: ${PYTHON_INCLUDE_DIRS}:${PYTHON_LIBRARIES}")
-	endif(Py3_FOUND)
+    find_package(Py3)
+    if(Py3_FOUND)
+        message("Python found: ${PYTHON_INCLUDE_DIRS}:${PYTHON_LIBRARIES}")
+    else(Py3_FOUND)
+        # If not try using pythonlibs
+        find_package(PythonLibs)
+        if(PYTHONLIBS_FOUND)
+            message("Python found: ${PYTHON_INCLUDE_DIRS}:${PYTHON_LIBRARIES}")
+        endif(PYTHONLIBS_FOUND)
+    endif(Py3_FOUND)
 endif(UNIX)
+
 
 # Find SDL2_mixer
 find_package(SDL2_mixer REQUIRED)
