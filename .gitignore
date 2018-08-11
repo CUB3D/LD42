@@ -348,20 +348,12 @@ ASALocalRun/
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
 
 # Executables
 *.exe
 *.out
 *.app
+
 ### CMake template
 CMakeCache.txt
 CMakeFiles
@@ -376,4 +368,5 @@ CTestTestfile.cmake
 !*.png
 !*.json
 !*.txt
+!Debug/res
 

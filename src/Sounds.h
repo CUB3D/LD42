@@ -15,6 +15,7 @@ public:
     WAVSound loss;
     WAVSound gun;
     WAVSound towerDestroy;
+    WAVSound wavestart;
 
     static Sounds& getSounds();
 
@@ -22,7 +23,8 @@ protected:
     Sounds() :
     loss("res/audio/isthisloss.wav"),
     gun("res/audio/gun.wav"),
-    towerDestroy("res/audio/towerdestroy.wav")
+    towerDestroy("res/audio/towerdestroy.wav"),
+    wavestart("res/audio/wavestart.wav")
     {}
 };
 

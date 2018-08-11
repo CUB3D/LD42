@@ -11,7 +11,6 @@
 #include "GameScene.h"
 
 
->>>>>>> 39fb205334cca551df73eae0e869add4c22a2665
 void WaveLogic::update(level level, Scene &scene) {
     if(spawnTimer.timerSpeed < 0) {
         spawnTimer.timerSpeed = level.waves[currentWave].delay;

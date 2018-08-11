@@ -8,7 +8,7 @@
 #include "SharedVariable.h"
 
 void AntAiComponent::update(Unknown::Entity &ent) {
-    Unknown::getUnknown<
+    //Unknown::getUnknown<
 }
 
 AntAiComponent::AntAiComponent(struct level leve) : curlvl(leve) {
