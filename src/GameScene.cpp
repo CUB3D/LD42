@@ -14,8 +14,6 @@
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
-Timer waveSpawn((float)1.0);
-
 int levelID = 1;
 
 Image background("res/Backgrounds/Flooding-Level-Bg.png");
@@ -123,15 +121,7 @@ void GameScene::update() {
     if(key.pressed())
         e.edit = true;
 
-    if(waveSpawn.isTickComplete()) {
-        printf("Spawning wave of size %d\n", this->currentLevel.waves.size());
-        // start spawning wave
-        // TODO: spawn on delay, cba to do rn
-        for(int i = 0; i < this->currentLevel.waves.size(); i++) {
-            //TODO: way to define level start in data
-            UK_LOAD_ENTITY_AT("Entities/Ant.json", 100, 100);
-        }
-    }
+    logic.update(currentLevel, *this);
 
     this->e.update();
 }

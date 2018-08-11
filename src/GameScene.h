@@ -5,12 +5,14 @@
 #include "Scene/Scene.h"
 #include "Editor.h"
 #include "LevelLoader.h"
+#include "WaveLogic.h"
 
 class GameScene : public ::Unknown::Scene {
 public:
     level currentLevel;
 
     Editor e;
+    WaveLogic logic;
 
 	GameScene();
 

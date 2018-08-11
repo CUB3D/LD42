@@ -45,13 +45,14 @@ level loadLevel(const std::string &str) {
 
     next: {
         std::getline(stream, line);
+        printf("Skipping: %s\n", line.c_str());
         while(!stream.eof()) {
             // Read 4 values from each line
             int data[2];
             for(int i = 0; i < 2; i++) {
                 stream >> line;
                 if(line == "###") { // Marks the end of this block
-                    goto next;
+                    goto loadpos;
                 }
                 ss << line;
                 ss >> data[i];
@@ -65,6 +66,51 @@ level loadLevel(const std::string &str) {
             l.waves.push_back(wave);
         }
     };
+
+    loadpos: {
+        std::getline(stream, line);
+        printf("Skipping %s\n", line.c_str());
+
+        // Read 4 values from each line
+        int data[2];
+        for(int i = 0; i < 2; i++) {
+            stream >> line;
+            ss << line;
+            ss >> data[i];
+            ss.clear();
+        }
+
+        l.spawnPos.x = data[0];
+        l.spawnPos.y = data[1];
+
+        printf("Spawnpos: %d, %d\n", data[0], data[1]);
+    };
+
+    std::getline(stream, line);
+    std::getline(stream, line);
+    printf("Skipping %s\n", line.c_str());
+    while(!stream.eof()) {
+        int data[3];
+        for(int i = 0; i < 3; i++) {
+            stream >> line;
+            if(line == "###") { // Marks the end of this block
+                //goto loadpos;
+            }
+            ss << line;
+            ss >> data[i];
+            printf("%s = %d", line.c_str(), data[i]);
+            ss.clear();
+        }
+
+        pathNode node;
+        node.x = data[0];
+        node.y = data[1];
+        node.angle = data[2];
+
+        printf("Pathing node: %d %d\n", node.x, node.y);
+
+        l.pathingNodes.push_back(node);
+    }
 
     return l;
 }

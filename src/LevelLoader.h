@@ -26,9 +26,18 @@ struct waveData {
     int delay;
 };
 
+struct pathNode {
+    int x;
+    int y;
+    double angle;
+};
+
 struct level {
     std::vector<levelElement> elements;
     std::vector<waveData> waves;
+    Unknown::Point<int> spawnPos;
+    std::vector<pathNode> pathingNodes;
+
 };
 
 level loadLevel(const std::string &str);
