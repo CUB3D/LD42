@@ -10,8 +10,6 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
     int endX = curlvl.pathingNodes[this->currentNodeIndex].x;
     int endY = curlvl.pathingNodes[this->currentNodeIndex].y;
 
-    printf("%d, %d\n", endX, endY);
-
     double delta = 0.16;
 
     bool atEnd = true;
@@ -45,7 +43,7 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
 
         // If we just passed the last node we have reached end of path
         if(this->currentNodeIndex == curlvl.pathingNodes.size()) {
-            ent.enabled=false;
+            ent.queueDisable();
             *Unknown::getUnknown()->variablelookup["health"] = Unknown::getUnknown()->variablelookup["health"]->operator double() - 1;
             if(Unknown::getUnknown()->variablelookup["health"]->operator double() == 0) {
                 UK_LOAD_SCENE("Fail");

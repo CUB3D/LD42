@@ -9,8 +9,10 @@
 
 #include "GameScene.h"
 #include "FailScene.h"
+#include "WinScene.h"
 
 void init() {
+    UK_ADD_SCENE(std::make_shared<WinScene>());
 	UK_ADD_SCENE(std::make_shared<GameScene>());
 	UK_ADD_SCENE(std::make_shared<FailScene>());
 	UK_LOAD_SCENE("Game");

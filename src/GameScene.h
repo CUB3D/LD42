@@ -19,6 +19,8 @@ public:
 	virtual void render() const override;
 	virtual void update() override;
 
+	void advanceLevel();
+
 	void loadLevel();
 	void uiCallback(std::shared_ptr<Unknown::UIEvent> evt);
 	void onClick(Unknown::MouseEvent evnt);
