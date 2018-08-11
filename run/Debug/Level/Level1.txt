@@ -9,3 +9,6 @@
 0 290 331 0
 0 128 152 0
 0 33 137 0
+###
+Wave info format is count,delay(ms)
+2 100

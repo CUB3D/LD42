@@ -21,43 +21,16 @@ struct levelElement {
     double angle;
 };
 
-std::vector<levelElement> loadLevel(const std::string& str) {
+struct waveData {
+    int count;
+    int delay;
+};
+
+struct level {
     std::vector<levelElement> elements;
+    std::vector<waveData> waves;
+};
 
-    // Create stream for file
-    std::filesystem::path file(str);
-    std::ifstream stream(file, std::ios::in);
-
-    std::stringstream ss;
-    std::string line;
-
-    // Skip first line
-    std::getline(stream, line);
-
-    while(!stream.eof()) {
-        // Read 4 values from each line
-        int data[4];
-        for(int i = 0; i < 4; i++) {
-            stream >> line;
-            ss << line;
-            ss >> data[i];
-            ss.clear();
-        }
-
-        levelElement e;
-        e.type = (Type)data[0];
-        e.x = data[1];
-        e.y = data[2];
-        e.angle = (data[3] / 180.0) * PI;
-
-#ifdef LVL_DBG
-        printf("Loaded %d,%d,%d,%d\n", e.type, e.x, e.y, e.data);
-#endif
-
-        elements.push_back(e);
-    }
-
-    return elements;
-}
+level loadLevel(const std::string &str);
 
 #endif //UNKNOWN_GAME_LEVELLOADER_H

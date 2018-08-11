@@ -1,0 +1,13 @@
+{
+  "Background": {
+    "Type": "Rect",
+    "Bounds": [0, 400, -1, -1],
+    "Colour": "FF00FF"
+  },
+  "Tower1": {
+    "Type": "Button",
+    "InsideComponent": "Background",
+    "Content": "Select tower 1",
+    "Bounds": ["minX+10", "minY+10", 100, 25]
+  }
+}

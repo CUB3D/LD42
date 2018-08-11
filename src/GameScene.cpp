@@ -8,18 +8,61 @@
 #include "Map.h"
 #include "LevelLoader.h"
 #include "KeyBind.h"
+#include "UI.h"
+#include "Timer.h"
 
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
+Timer waveSpawn((float)1.0);
 
-int levelID = 0;
+int levelID = 1;
 
 Image background("res/Backgrounds/Flooding-Level-Bg.png");
 KeyBind key(SDLK_q, "edit");
 
+int selectedTower = 0;
+
+UIContainer ui;
+
+void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
+    if(evnt->componentName == "Tower1") {
+        selectedTower = 1;
+    }
+
+    printf("%d\n", selectedTower);
+}
+
+void GameScene::onClick(MouseEvent evnt) {
+    // Is it on a tower
+
+    int x = evnt.location.x;
+    int y = evnt.location.y;
+
+    for(auto& l : this->currentLevel.elements) {
+        if(x > l.x && x < l.x + 64) {
+            if(y > l.y && y < l.y + 16) {
+                auto a = UK_LOAD_ENTITY_AT("Entities/Tower2.json", l.x, l.y - 91);
+                a->angle = l.angle;
+                this->addObject(a);
+                auto b = UK_LOAD_ENTITY_AT("Entities/Tower3.json", l.x - 16, l.y - 91);
+                b->angle = l.angle;
+                this->addObject(b);
+            }
+        }
+    }
+}
+
 GameScene::GameScene() : Scene("Game") {
 	UK_LOG_INFO("Loading game scene");
+
+	UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
+
+	ui = Loader::loadUI("res/GameUI.json");
+	ui.setGlobalFont(std::make_shared<TTFont>("res/Fonts/Arimo-Regular.ttf", 15, UK_COLOUR_RGB(0, 0, 0)));
+	ui.initUI();
+
+
 
 	auto x = [this](auto me) {
         if(!e.edit)
@@ -29,19 +72,39 @@ GameScene::GameScene() : Scene("Game") {
         UK_GET_MOUSE_POS(pos);
 
         printf("%d,%d\n", pos.x, pos.y);
-        ::Unknown::getUnknown()->globalSceneManager.currentScene->addObject(Loader::loadEntityAt("Entities/Tower1.json", *this, pos.x, pos.y));
+        levelElement e;
+        e.type = (Type)0;
+        e.x = pos.x;
+        e.y = pos.y;
+        e.angle = 0;
+        this->currentLevel.elements.push_back(e);
+
+
+        printf("## Format is Type, X, Y, angle (note first line is skipped)\n");
+        for(auto& a : this->currentLevel.elements) {
+            printf("%d %d %d %d\n", a.type, a.x, a.y, a.angle);
+        }
     };
 
     registerMouseListener(x, "editor");
 
+    UK_ADD_MOUSE_LISTENER_INTERNAL(onClick, "towerplace");
 
-	for(levelElement& element : loadLevel("Level/Level1.txt")) {
-		if(element.type == TowerBase) {
-		    auto ent = UK_LOAD_ENTITY_AT("Entities/Tower1.json", element.x, element.y);
-		    ent->angle = element.angle;
-			this->addObject(ent);
-		}
-	}
+    loadLevel();
+}
+
+void GameScene::loadLevel() {
+    std::string lvl = "Level/Level" + intToString(levelID) + ".txt";
+
+    this->currentLevel = ::loadLevel(lvl);
+
+    for(levelElement& element : this->currentLevel.elements) {
+        if(element.type == TowerBase) {
+            auto ent = UK_LOAD_ENTITY_AT("Entities/Tower1.json", element.x, element.y);
+            ent->angle = element.angle;
+            this->addObject(ent);
+        }
+    }
 }
 
 void GameScene::render() const {
@@ -50,6 +113,8 @@ void GameScene::render() const {
     Scene::render();
 
     this->e.render();
+
+    ui.render(0, 0);
 }
 
 void GameScene::update() {
@@ -57,6 +122,16 @@ void GameScene::update() {
 
     if(key.pressed())
         e.edit = true;
+
+    if(waveSpawn.isTickComplete()) {
+        printf("Spawning wave of size %d\n", this->currentLevel.waves.size());
+        // start spawning wave
+        // TODO: spawn on delay, cba to do rn
+        for(int i = 0; i < this->currentLevel.waves.size(); i++) {
+            //TODO: way to define level start in data
+            UK_LOAD_ENTITY_AT("Entities/Ant.json", 100, 100);
+        }
+    }
 
     this->e.update();
 }
