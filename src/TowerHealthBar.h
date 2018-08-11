@@ -10,6 +10,10 @@
 class TowerHealthBar : public HealthBar
 {
 public:
+    std::shared_ptr<Unknown::Entity> turret;
+
+    TowerHealthBar(std::shared_ptr<Unknown::Entity> turret);
+
     virtual void update(Entity& ent) override;
     virtual void render(const Entity &ent, double Xoffset, double Yoffset) const override;
 };

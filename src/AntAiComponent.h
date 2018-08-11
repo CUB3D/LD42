@@ -10,8 +10,8 @@
 #include "Scene/Scene.h"
 class AntAiComponent : public Unknown::Component {
 public:
-    AntAiComponent( level currentlvl, int rate);
-    int rate;
+    AntAiComponent(level currentlvl, double rate);
+    double rate;
     struct level curlvl;
 
     virtual void update(Unknown::Entity& ent) override;

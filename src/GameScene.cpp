@@ -58,15 +58,15 @@ void GameScene::onClick(MouseEvent evnt) {
         for (auto &l : this->currentLevel.elements) {
             if (x > l.x && x < l.x + 64) {
                 if (y > l.y && y < l.y + 16) {
-                    // Add the tower
-                    auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
-                    a->angle = l.angle;
-                    a->components.push_back(std::make_shared<TowerHealthBar>());
-                    this->addObject(a);
-                    // Add the gun
+                    // gun
                     auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
                     b->angle = l.angle;
                     this->addObject(b);
+                    // Add the tower
+                    auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
+                    a->angle = l.angle;
+                    a->components.push_back(std::make_shared<TowerHealthBar>(b));
+                    this->addObject(a);
                     // Remove funds
                     funds = (double)funds - selectedCost;
                 }

@@ -12,7 +12,7 @@ using namespace ::Unknown;
 class HealthBar : public ::Unknown::Component
 {
 public:
-    int health;
+    double health;
 
     HealthBar();
 

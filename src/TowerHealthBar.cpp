@@ -8,6 +8,7 @@
 void TowerHealthBar::update(Entity &ent) {
     if(this->health <= 0) {
         ent.queueDisable();
+        turret->queueDisable();
 
         //TODO: spawn ded towr
        // auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
@@ -23,3 +24,5 @@ void TowerHealthBar::render(const Entity &ent, double Xoffset, double Yoffset) c
     UK_DRAW_RECT(ent.position.x + 12, ent.position.y + offset, 25, height, Colour::RED);
     UK_DRAW_RECT(ent.position.x + 12, ent.position.y + offset, health, height, Colour::GREEN);
 }
+
+TowerHealthBar::TowerHealthBar(std::shared_ptr<Entity> turret) : turret(turret) {}

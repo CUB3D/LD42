@@ -10,24 +10,38 @@
 #include "AntAiComponent.h"
 #include "math.h"
 #include "TowerHealthBar.h"
+#include "PathFollowerComponent.h"
 
 void AntAiComponent::update(Unknown::Entity &ent) {
-    auto scene = Unknown::getUnknown()->globalSceneManager.getScene<Unknown::Scene>();
-    float minDist(-1);
+    auto pathingcomp = ent.getComponent<PathFollowerComponent>();
+
+    double MAX_DIST = 300;
+
+    auto towers = Unknown::getUnknown()->globalSceneManager.getScene<Unknown::Scene>()->getObjects<Unknown::Entity>("TowerBody");
+
+    double minDist(99999);
     std::shared_ptr<Unknown::Entity> TargetObj;
-    for(auto& obj : scene->getObjects<Unknown::Entity>("TowerBody")) {
+
+    for(auto& obj : towers) {
+        if(!obj->enabled)
+            continue;
         // Get the component etc
-        float dist = sqrt(pow(obj->position.x - ent.position.x,2) + pow(obj->position.x - ent.position.y,2));
-        if (dist < minDist and minDist != -1) {
+        double dist = sqrt(pow(obj->position.x - ent.position.x,2) + pow(obj->position.x - ent.position.y,2));
+
+        if (dist < minDist && dist < MAX_DIST) {
             minDist = dist;
             TargetObj = obj;
         }
     }
-    if (TargetObj != NULL) {
-        TowerHealthBar targetBar = *TargetObj->getComponent<TowerHealthBar>();
-        targetBar.health -= rate;
+    if (TargetObj) {
+        auto targetBar = TargetObj->getComponent<TowerHealthBar>();
+        targetBar->health -= rate;
+        // If attacking then they should stop moving
+        pathingcomp->stopped = true;
+    } else {
+        pathingcomp->stopped = false;
     }
 }
-AntAiComponent::AntAiComponent(struct level leve,int rate) : curlvl(leve), rate(rate){
+AntAiComponent::AntAiComponent(struct level leve, double rate) : curlvl(leve), rate(rate) {
 
 }

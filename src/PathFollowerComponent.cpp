@@ -8,6 +8,9 @@
 #include "Sounds.h"
 
 void PathFollowerComponent::update(Unknown::Entity &ent) {
+    if(stopped)
+        return;
+
     int endX = curlvl.pathingNodes[this->currentNodeIndex].x;
     int endY = curlvl.pathingNodes[this->currentNodeIndex].y;
 
@@ -56,6 +59,6 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
     }
 }
 
-PathFollowerComponent::PathFollowerComponent(struct level leve) : curlvl(leve){
+PathFollowerComponent::PathFollowerComponent(struct level leve) : curlvl(leve), stopped(false) {
 
 }
