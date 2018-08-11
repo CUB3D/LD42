@@ -8,6 +8,7 @@
 #include "Log.h"
 #include <filesystem>
 #include <fstream>
+#include "Utils.h"
 
 enum Type {
     TowerBase
@@ -17,7 +18,7 @@ struct levelElement {
     Type type;
     int x;
     int y;
-    int data;
+    double angle;
 };
 
 std::vector<levelElement> loadLevel(const std::string& str) {
@@ -40,7 +41,6 @@ std::vector<levelElement> loadLevel(const std::string& str) {
             stream >> line;
             ss << line;
             ss >> data[i];
-            UK_LOG_INFO(line, "=", ::Unknown::intToString(data[i]));
             ss.clear();
         }
 
@@ -48,7 +48,7 @@ std::vector<levelElement> loadLevel(const std::string& str) {
         e.type = (Type)data[0];
         e.x = data[1];
         e.y = data[2];
-        e.data = data[3];
+        e.angle = (data[3] / 180.0) * PI;
 
 #ifdef LVL_DBG
         printf("Loaded %d,%d,%d,%d\n", e.type, e.x, e.y, e.data);
