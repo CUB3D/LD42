@@ -5,6 +5,7 @@
 #include "PathFollowerComponent.h"
 #include "Unknown.h"
 #include "SharedVariable.h"
+#include "Sounds.h"
 
 void PathFollowerComponent::update(Unknown::Entity &ent) {
     int endX = curlvl.pathingNodes[this->currentNodeIndex].x;
@@ -44,6 +45,9 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
         // If we just passed the last node we have reached end of path
         if(this->currentNodeIndex == curlvl.pathingNodes.size()) {
             ent.queueDisable();
+
+            Sounds::getSounds().loss.playSingle();
+
             *Unknown::getUnknown()->variablelookup["health"] = Unknown::getUnknown()->variablelookup["health"]->operator double() - 1;
             if(Unknown::getUnknown()->variablelookup["health"]->operator double() == 0) {
                 UK_LOAD_SCENE("Fail");
