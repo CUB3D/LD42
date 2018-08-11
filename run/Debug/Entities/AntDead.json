@@ -1,0 +1,11 @@
+{
+  "Tag": "AntDead",
+  "Width": 10,
+  "Height":  10,
+  "Components": {
+    "BRender": {
+      "Type": "ImageRenderer",
+      "File": "res/Dead Ant.png"
+    }
+  }
+}

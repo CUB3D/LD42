@@ -19,6 +19,7 @@ struct levelElement {
     int x;
     int y;
     double angle;
+    bool placed;
 };
 
 struct waveData {

@@ -13,6 +13,7 @@
 #include "SharedVariable.h"
 #include "TowerHealthBar.h"
 #include "Font.h"
+#include "Sounds.h"
 
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
@@ -56,8 +57,14 @@ void GameScene::onClick(MouseEvent evnt) {
     if((double)funds >= selectedCost) {
         // Find which base is being clicked
         for (auto &l : this->currentLevel.elements) {
+            if(l.placed) {
+                //TODO: thunk
+                continue;
+            }
             if (x > l.x && x < l.x + 64) {
                 if (y > l.y && y < l.y + 16) {
+                    Sounds::getSounds().build.playSingle();
+
                     // gun
                     auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
                     b->angle = l.angle;
@@ -69,6 +76,7 @@ void GameScene::onClick(MouseEvent evnt) {
                     this->addObject(a);
                     // Remove funds
                     funds = (double)funds - selectedCost;
+                    l.placed = true;
                 }
             }
         }

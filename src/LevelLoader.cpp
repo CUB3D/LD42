@@ -36,6 +36,7 @@ level loadLevel(const std::string &str) {
         e.x = data[1];
         e.y = data[2];
         e.angle = (data[3] / 180.0) * PI;
+        e.placed = false;
 
 #ifdef LVL_DBG
         printf("Loaded %d,%d,%d,%d\n", e.type, e.x, e.y, e.data);
