@@ -26,14 +26,17 @@ int levelID = 1;
 Image background("res/Backgrounds/Flooding-Level-Bg.png");
 KeyBind key(SDLK_q, "edit");
 SharedVariable health("health", 10.0);
+SharedVariable funds("funds", 100.0);
 
 int selectedTower = 0;
+double selectedCost = 20.0;
 
 UIContainer ui;
 
 void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
     if(evnt->componentName == "Tower1") {
-        selectedTower = 1;
+        selectedTower = 0;
+        selectedCost = 20.0;
     }
     if(evnt->componentName == "Reload") {
         this->loadLevel();
@@ -44,20 +47,29 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
 
 void GameScene::onClick(MouseEvent evnt) {
     // Is it on a tower
+    if(evnt.buttonState != PRESSED)
+        return;
 
     int x = evnt.location.x;
     int y = evnt.location.y;
 
-    for(auto& l : this->currentLevel.elements) {
-        if(x > l.x && x < l.x + 64) {
-            if(y > l.y && y < l.y + 16) {
-                auto a = UK_LOAD_ENTITY_AT("Entities/Tower2.json", l.x, l.y - 91);
-                a->angle = l.angle;
-                a->components.push_back(std::make_shared<TowerHealthBar>());
-                this->addObject(a);
-                auto b = UK_LOAD_ENTITY_AT("Entities/Tower3.json", l.x - 16, l.y - 91);
-                b->angle = l.angle;
-                this->addObject(b);
+    if((double)funds >= selectedCost) {
+        // Find which base is being clicked
+        for (auto &l : this->currentLevel.elements) {
+            if (x > l.x && x < l.x + 64) {
+                if (y > l.y && y < l.y + 16) {
+                    // Add the tower
+                    auto a = UK_LOAD_ENTITY_AT("Entities/Tower2.json", l.x, l.y - 91);
+                    a->angle = l.angle;
+                    a->components.push_back(std::make_shared<TowerHealthBar>());
+                    this->addObject(a);
+                    // Add the gun
+                    auto b = UK_LOAD_ENTITY_AT("Entities/Tower3.json", l.x - 16, l.y - 91);
+                    b->angle = l.angle;
+                    this->addObject(b);
+                    // Remove funds
+                    funds = (double)funds - selectedCost;
+                }
             }
         }
     }
@@ -127,6 +139,10 @@ void GameScene::render() const {
     Scene::render();
 
     this->e.render();
+
+    for(auto& tower : getObjects<IRenderable>("Tower")) {
+        tower->render(0, 0);
+    }
 
     ui.render(0, 0);
 }

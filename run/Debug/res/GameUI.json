@@ -27,5 +27,17 @@
       "maxX-20",
       0
     ]
+  },
+  "Funds": {
+    "Type": "Text",
+    "InsideComponent": "Background",
+    "Colour": "ff000000",
+    "Content": "Funds: ${funds}",
+    "Bounds": [
+      "minX+10",
+      "minY+80",
+      "maxX-20",
+      0
+    ]
   }
 }
