@@ -10,14 +10,22 @@
 #include "KeyBind.h"
 #include "UI.h"
 #include "Timer.h"
+#include "SharedVariable.h"
 
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
+
+//TODO: load next level when this one is done
+//TODO: enemies kill
+// TODO: kill enemies
+//TODO: turrets can be attacked
+//TODO: destroyed turret
 
 int levelID = 1;
 
 Image background("res/Backgrounds/Flooding-Level-Bg.png");
 KeyBind key(SDLK_q, "edit");
+SharedVariable health("health", 10.0);
 
 int selectedTower = 0;
 
@@ -26,6 +34,9 @@ UIContainer ui;
 void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
     if(evnt->componentName == "Tower1") {
         selectedTower = 1;
+    }
+    if(evnt->componentName == "Reload") {
+        this->loadLevel();
     }
 
     printf("%d\n", selectedTower);
@@ -92,6 +103,9 @@ GameScene::GameScene() : Scene("Game") {
 }
 
 void GameScene::loadLevel() {
+    this->renderables.clear();
+    this->updatables.clear();
+    this->tagables.clear();
     std::string lvl = "Level/Level" + intToString(levelID) + ".txt";
 
     this->currentLevel = ::loadLevel(lvl);

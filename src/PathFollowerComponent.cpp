@@ -4,6 +4,7 @@
 
 #include "PathFollowerComponent.h"
 #include "Unknown.h"
+#include "SharedVariable.h"
 
 void PathFollowerComponent::update(Unknown::Entity &ent) {
     int endX = curlvl.pathingNodes[this->currentNodeIndex].x;
@@ -11,25 +12,42 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
 
     printf("%d, %d\n", endX, endY);
 
-    double delta = Unknown::getUnknown()->lastUpdateTimeMS;
+    double delta = 0.16;
 
     bool atEnd = true;
 
-    if(ent.position.x < endX) {
-        ent.position.x += endX * speed * delta;
-        atEnd = false;
+    if(endX > 0) {
+        if (ent.position.x < endX) {
+            ent.position.x += speed * delta;
+            atEnd = false;
+        }
+    } else {
+        if (ent.position.x > -endX) {
+            ent.position.x -= speed * delta;
+            atEnd = false;
+        }
     }
-    if(ent.position.y < endY) {
-        ent.position.y += endY * speed * delta;
-        atEnd = false;
+
+    if(endY > 0) {
+        if (ent.position.y < endY) {
+            ent.position.y += speed * delta;
+            atEnd = false;
+        }
+    } else {
+        if (ent.position.y > -endY) {
+            ent.position.y -= speed * delta;
+            atEnd = false;
+        }
     }
 
     if(atEnd) {
         this->currentNodeIndex++;
 
         // If we just passed the last node we have reached end of path
-        if(this->currentNodeIndex == curlvl.pathingNodes.size())
+        if(this->currentNodeIndex == curlvl.pathingNodes.size()) {
             this->speed = 0;
+            *Unknown::getUnknown()->variablelookup["health"] = Unknown::getUnknown()->variablelookup["health"]->operator double() - 1;
+        }
     }
 }
 

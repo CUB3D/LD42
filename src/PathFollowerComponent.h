@@ -14,7 +14,7 @@ public:
 
     struct level curlvl;
     int currentNodeIndex = 0;
-    double speed = 0.5;
+    double speed = 10;
 
     virtual void update(Unknown::Entity& ent) override;
 

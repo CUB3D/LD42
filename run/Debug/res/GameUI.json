@@ -1,7 +1,7 @@
 {
   "Background": {
     "Type": "Rect",
-    "Bounds": [0, 400, -1, -1],
+    "Bounds": [0, 480, -1, -1],
     "Colour": "FF00FF"
   },
   "Tower1": {
@@ -9,5 +9,23 @@
     "InsideComponent": "Background",
     "Content": "Select tower 1",
     "Bounds": ["minX+10", "minY+10", 100, 25]
+  },
+  "Reload": {
+    "Type": "Button",
+    "InsideComponent": "Background",
+    "Content": "Reload",
+    "Bounds": ["minX+125", "minY+10", 100, 25]
+  },
+  "HealthText": {
+    "Type": "Text",
+    "InsideComponent": "Background",
+    "Colour": "ff000000",
+    "Content": "Health: ${health}",
+    "Bounds": [
+      "minX+10",
+      "minY+60",
+      "maxX-20",
+      0
+    ]
   }
 }
