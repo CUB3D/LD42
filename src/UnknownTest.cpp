@@ -11,7 +11,7 @@
 
 void init() {
 	UK_ADD_SCENE(std::make_shared<GameScene>());
-	UK_LOAD_SCENE("GameScene");
+	UK_LOAD_SCENE("Game");
 }
 
 #ifdef _WIN32

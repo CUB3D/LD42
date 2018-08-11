@@ -7,6 +7,9 @@
 class GameScene : public ::Unknown::Scene {
 public:
 	GameScene();
+
+	virtual void render() const override;
+	virtual void update() override;
 };
 
 #endif
