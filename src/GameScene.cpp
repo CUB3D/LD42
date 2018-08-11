@@ -16,6 +16,7 @@
 #include "Sounds.h"
 #include "TowerAiComponent.h"
 
+
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
@@ -159,6 +160,18 @@ void GameScene::update() {
         e.edit = true;
 
     logic.update(currentLevel, *this);
+
+    bool allAntsDead = true;
+    for(auto& ant : this->getObjects<Unknown::Entity>("Ant")) {
+        if(ant->enabled) {
+            allAntsDead = false;
+            break;
+        }
+    }
+
+    if(logic.doneSpawning && allAntsDead) {
+        advanceLevel();
+    }
 
     this->e.update();
 }

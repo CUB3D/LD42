@@ -17,6 +17,7 @@ public:
     Timer spawnTimer;
     int currentWavePosition;
     int currentWave;
+    bool doneSpawning;
 
     WaveLogic();
 

@@ -6,6 +6,7 @@
 #include "UI2D.h"
 #include "Scene/Scene.h"
 #include "Loader.h"
+#include "SharedVariable.h"
 
 void HealthBar::render(const Entity &ent, double Xoffset, double Yoffset) const {
     Component::render(ent, Xoffset, Yoffset);
@@ -21,6 +22,8 @@ void HealthBar::update(Entity &ent) {
 
         auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
         scene->addObject(::Unknown::Loader::loadEntityAt("Entities/AntDead.json", *scene, ent.position.x, ent.position.y));
+        //TODO: better shared var api
+        *Unknown::getUnknown()->variablelookup["funds"] = Unknown::getUnknown()->variablelookup["funds"]->operator double() + 20;
     }
 }
 

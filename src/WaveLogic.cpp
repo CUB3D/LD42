@@ -12,6 +12,9 @@
 
 
 void WaveLogic::update(level level, Scene &scene) {
+    if(doneSpawning)
+        return;
+
     if(spawnTimer.timerSpeed < 0) {
         spawnTimer.timerSpeed = level.waves[currentWave].delay;
     }
@@ -37,12 +40,12 @@ void WaveLogic::update(level level, Scene &scene) {
             currentWavePosition = 0;
 
             if(currentWave == level.waves.size()) {
-                Unknown::getUnknown()->globalSceneManager.getScene<GameScene>()->advanceLevel();
+                doneSpawning = true;
             }
         }
     }
 }
 
-WaveLogic::WaveLogic() : currentWavePosition(0), currentWave(0), spawnTimer((float)-1) {
+WaveLogic::WaveLogic() : currentWavePosition(0), currentWave(0), spawnTimer((float)-1), doneSpawning(false) {
 
 }

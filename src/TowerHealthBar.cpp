@@ -4,6 +4,8 @@
 
 #include "TowerHealthBar.h"
 #include "UI2D.h"
+#include "Scene/Scene.h"
+#include "Loader.h"
 
 void TowerHealthBar::update(Entity &ent) {
     if(this->health <= 0) {
@@ -11,8 +13,9 @@ void TowerHealthBar::update(Entity &ent) {
         turret->queueDisable();
 
         //TODO: spawn ded towr
-       // auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
-       // scene->addObject(::Unknown::Loader::loadEntityAt("Entities/AntDead.json", *scene, ent.position.x, ent.position.y));
+        auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
+        scene->addObject(::Unknown::Loader::loadEntityAt("Entities/TurretDead.json", *scene, ent.position.x, ent.position.y));
+
     }
 }
 
