@@ -20,7 +20,7 @@ void AntAiComponent::update(Unknown::Entity &ent) {
     auto towers = Unknown::getUnknown()->globalSceneManager.getScene<Unknown::Scene>()->getObjects<Unknown::Entity>("TowerBody");
 
     double minDist(99999);
-    std::shared_ptr<Unknown::Entity> TargetObj;
+    std::shared_ptr<Unknown::Entity> TargetObj = nullptr;
 
     for(auto& obj : towers) {
         if(!obj->enabled)
