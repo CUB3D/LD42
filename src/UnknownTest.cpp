@@ -11,9 +11,16 @@
 #include "FailScene.h"
 #include "WinScene.h"
 
+#include "Font.h"
+
+std::shared_ptr<Unknown::Graphics::TTFont> font;
+
+
 void init() {
+    font = std::make_shared<Unknown::Graphics::TTFont>("res/Fonts/Arimo-Regular.ttf", 15, UK_COLOUR_RGB(0, 0, 0));
+
     UK_ADD_SCENE(std::make_shared<WinScene>());
-	UK_ADD_SCENE(std::make_shared<GameScene>());
+	UK_ADD_SCENE(std::make_shared<GameScene>(font));
 	UK_ADD_SCENE(std::make_shared<FailScene>());
 	UK_LOAD_SCENE("Game");
 }

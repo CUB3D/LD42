@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include "SharedVariable.h"
 #include "TowerHealthBar.h"
+#include "Font.h"
 
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
@@ -74,17 +75,12 @@ void GameScene::onClick(MouseEvent evnt) {
     }
 }
 
-GameScene::GameScene() : Scene("Game") {
-
-	UK_LOG_INFO("Loading game scene");
-
+GameScene::GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font) : Scene("Game") {
 	UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
 
 	ui = Loader::loadUI("res/GameUI.json");
-	ui.setGlobalFont(std::make_shared<TTFont>("res/Fonts/Arimo-Regular.ttf", 15, UK_COLOUR_RGB(0, 0, 0)));
+	ui.setGlobalFont(font);
 	ui.initUI();
-
-
 
 	auto x = [this](auto me) {
         if(!e.edit)

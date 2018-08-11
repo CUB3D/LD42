@@ -6,6 +6,7 @@
 #include "Editor.h"
 #include "LevelLoader.h"
 #include "WaveLogic.h"
+#include "Font.h"
 
 class GameScene : public ::Unknown::Scene {
 public:
@@ -14,7 +15,7 @@ public:
     Editor e;
     WaveLogic logic;
 
-	GameScene();
+	GameScene(std::shared_ptr<Unknown::Graphics::TTFont> font);
 
 	virtual void render() const override;
 	virtual void update() override;
