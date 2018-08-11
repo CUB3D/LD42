@@ -6,6 +6,7 @@
 
 level loadLevel(const std::string &str) {
     level l;
+    l.waves = std::vector<waveData>();
 
     // Create stream for file
     std::filesystem::path file(str);
