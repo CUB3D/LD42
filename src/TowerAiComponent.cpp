@@ -30,11 +30,12 @@ void TowerAiComponent::update(Unknown::Entity &ent)
     if (TargetObj)
     {
         auto targetBar = TargetObj->getComponent<HealthBar>();
+        printf("Doing %lf\n", rate);
         targetBar->health -= rate;
     }
 }
 
-TowerAiComponent::TowerAiComponent(double rate, int range) : rate(rate), range(range){
+TowerAiComponent::TowerAiComponent(double rate, double range) : rate(rate), range(range){
 
 }
 
