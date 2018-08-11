@@ -11,6 +11,7 @@
 #include "UI.h"
 #include "Timer.h"
 #include "SharedVariable.h"
+#include "TowerHealthBar.h"
 
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
@@ -52,6 +53,7 @@ void GameScene::onClick(MouseEvent evnt) {
             if(y > l.y && y < l.y + 16) {
                 auto a = UK_LOAD_ENTITY_AT("Entities/Tower2.json", l.x, l.y - 91);
                 a->angle = l.angle;
+                a->components.push_back(std::make_shared<TowerHealthBar>());
                 this->addObject(a);
                 auto b = UK_LOAD_ENTITY_AT("Entities/Tower3.json", l.x - 16, l.y - 91);
                 b->angle = l.angle;
@@ -62,6 +64,7 @@ void GameScene::onClick(MouseEvent evnt) {
 }
 
 GameScene::GameScene() : Scene("Game") {
+
 	UK_LOG_INFO("Loading game scene");
 
 	UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
@@ -137,4 +140,16 @@ void GameScene::update() {
     logic.update(currentLevel, *this);
 
     this->e.update();
+}
+
+void GameScene::advanceLevel() {
+    levelID++;
+
+    //TODO: update this to represent the end
+    if(levelID == 2) {
+        UK_LOAD_SCENE("Win");
+        return;
+    }
+
+    loadLevel();
 }

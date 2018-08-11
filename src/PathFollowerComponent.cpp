@@ -10,8 +10,6 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
     int endX = curlvl.pathingNodes[this->currentNodeIndex].x;
     int endY = curlvl.pathingNodes[this->currentNodeIndex].y;
 
-    printf("%d, %d\n", endX, endY);
-
     double delta = 0.16;
 
     bool atEnd = true;

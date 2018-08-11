@@ -4,6 +4,8 @@
 
 #include "HealthBar.h"
 #include "UI2D.h"
+#include "Scene/Scene.h"
+#include "Loader.h"
 
 void HealthBar::render(const Entity &ent, double Xoffset, double Yoffset) const {
     Component::render(ent, Xoffset, Yoffset);
@@ -14,8 +16,12 @@ void HealthBar::render(const Entity &ent, double Xoffset, double Yoffset) const 
 }
 
 void HealthBar::update(Entity &ent) {
-    if(this->health <= 0)
+    if(this->health <= 0) {
         ent.queueDisable();
+
+        auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
+        scene->addObject(::Unknown::Loader::loadEntityAt("Entities/AntDead.json", *scene, ent.position.x, ent.position.y));
+    }
 }
 
 HealthBar::HealthBar() : health(25) {}

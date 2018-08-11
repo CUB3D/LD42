@@ -10,7 +10,11 @@
 0 128 152 0
 0 33 137 0
 ### Wave info format is count,delay(ms)
-1 10000
+3 200
+0 10000
+5 200
+0 10000
+10 300
 ### Spawn pos
 10 10
 ### Pathing nodes (x, y, angle)
