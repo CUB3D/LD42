@@ -22,6 +22,8 @@ public:
     WaveLogic();
 
     void update(level level, Scene &scene);
+
+    void reset();
 };
 
 

@@ -49,3 +49,10 @@ void WaveLogic::update(level level, Scene &scene) {
 WaveLogic::WaveLogic() : currentWavePosition(0), currentWave(0), spawnTimer((float)-1), doneSpawning(false) {
 
 }
+
+void WaveLogic::reset() {
+    currentWave = 0;
+    currentWavePosition = 0;
+    doneSpawning = false;
+    spawnTimer.timerSpeed=-1;
+}
