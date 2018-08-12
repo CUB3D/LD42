@@ -51,6 +51,10 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
     if(evnt->componentName == "Reload") {
         this->loadLevel();
     }
+    if(evnt->componentName =="NextLevel")
+    {
+        this->advanceLevel();
+    }
 
     printf("%d\n", selectedTower);
 }
@@ -135,7 +139,7 @@ void GameScene::loadLevel() {
     std::string lvl = "Level/Level" + intToString(levelID) + ".txt";
 
     this->currentLevel = ::loadLevel(lvl);
-
+    Image background(this->currentLevel.imgPath);
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
             auto ent = UK_LOAD_ENTITY_AT("Entities/Tower_Base.json", element.x, element.y);

@@ -38,6 +38,7 @@ struct level {
     std::vector<waveData> waves;
     Unknown::Point<int> spawnPos;
     std::vector<pathNode> pathingNodes;
+    std::string imgPath;
 
 };
 
