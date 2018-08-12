@@ -31,5 +31,3 @@
 -93 7 0
 -137 5 0
 -112 10 0
-### Background
-res/Backgrounds/Alien-Landings-Bg.png

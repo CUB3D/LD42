@@ -3,13 +3,16 @@
 //
 
 #include "FailScene.h"
+#include "Sounds.h"
 
-FailScene::FailScene() : Scene("Fail"), background("res/isthisloss.png") {
-
+FailScene::FailScene() : Scene("Fail"), background("res/isthisloss.png"), soundPlayed(false) {
 }
 
 void FailScene::render() const {
     Scene::render();
 
     this->background.render(0, 0);
+
+    if(!soundPlayed)
+        Sounds::getSounds().towerDestroy.playSingle();
 }

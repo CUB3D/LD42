@@ -141,7 +141,7 @@ void GameScene::loadLevel() {
 
     this->currentLevel = ::loadLevel(lvl);
 
-    background = Image(currentLevel.imgPath);
+    background = Image("res/Backgrounds/" + intToString(levelID) + ".png");
 
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
