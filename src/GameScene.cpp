@@ -169,8 +169,8 @@ void GameScene::update() {
 
     logic.update(currentLevel, *this);
 
-    currentWave = logic.currentWave;
-    maxWave = currentLevel.waves.size();
+    currentWave = (double) logic.currentWave;
+    maxWave = (double) currentLevel.waves.size();
 
     bool allAntsDead = true;
     for(auto& ant : this->getObjects<Unknown::Entity>("Ant")) {

@@ -44,9 +44,21 @@
     "Type": "Text",
     "InsideComponent": "Background",
     "Colour": "ff000000",
-    "Content": "Wave: ${currentWave}/${maxWave}",
+    "Content": "Wave: ${currentWave} / ",
     "Bounds": [
       "minX+10",
+      "minY+100",
+      "maxX-20",
+      0
+    ]
+  },
+  "maxWave": {
+    "Type": "Text",
+    "InsideComponent": "Background",
+    "Colour": "ff000000",
+    "Content": "${maxWave}",
+    "Bounds": [
+      "minX+75",
       "minY+100",
       "maxX-20",
       0
