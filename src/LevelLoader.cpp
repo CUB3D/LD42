@@ -122,9 +122,6 @@ level loadLevel(const std::string &str) {
             node.angle = nums[i + 2];
             l.pathingNodes.push_back(node);
         }
-        std::getline(stream, line);
-        printf("LevelString %s", line.c_str());
-        l.imgPath = line;
     };
 
     return l;
