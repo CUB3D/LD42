@@ -30,7 +30,7 @@ using namespace ::Unknown::Graphics;
 
 int levelID = 1;
 
-std::shared_ptr<Image> background;
+Image background("res/Backgrounds/1.png");
 KeyBind key(SDLK_q, "edit");
 SharedVariable health("health", 10.0);
 SharedVariable funds("funds", 100.0);
@@ -143,7 +143,7 @@ void GameScene::loadLevel() {
 
 
 
-    background = std::make_shared<Image>(currentLevel.imgPath);
+    background = Image(currentLevel.imgPath);
 
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
@@ -155,7 +155,7 @@ void GameScene::loadLevel() {
 }
 
 void GameScene::render() const {
-    background->render(0, 0);
+    background.render(0, 0);
 
     Scene::render();
 
