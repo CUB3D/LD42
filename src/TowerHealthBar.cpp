@@ -6,16 +6,20 @@
 #include "UI2D.h"
 #include "Scene/Scene.h"
 #include "Loader.h"
+#include "AnimationHelper.h"
+#include "Entity/AnimationRenderComponent.h"
 
 void TowerHealthBar::update(Entity &ent) {
     if(this->health <= 0) {
         ent.queueDisable();
         turret->queueDisable();
 
-        //TODO: spawn ded towr
         auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
-        scene->addObject(::Unknown::Loader::loadEntityAt("Entities/TurretDead.json", *scene, ent.position.x, ent.position.y));
 
+        //TODO: way to load from json
+        auto ded = ::Unknown::Loader::loadEntityAt("Entities/TurretDead.json", *scene, ent.position.x, ent.position.y);
+        ded->components.push_back(std::make_shared<Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
+        scene->addObject(ded);
     }
 }
 

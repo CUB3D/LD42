@@ -1,11 +1,5 @@
 {
   "Tag": "TowerDead",
   "Width": 10,
-  "Height":  10,
-  "Components": {
-    "BRender": {
-      "Type": "ImageRenderer",
-      "File": "res/destoryed_turret.png"
-    }
-  }
+  "Height":  10
 }
