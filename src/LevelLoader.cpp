@@ -116,7 +116,7 @@ level loadLevel(const std::string &str) {
         l.pathingNodes.push_back(node);
     }
     std::getline(stream, line);
-    printf("Skipping %s\n", line.c_str());
+    printf("Skipping A %s\n", line.c_str());
     std::getline(stream, line);
     l.imgPath = line;
 

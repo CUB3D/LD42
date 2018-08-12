@@ -85,7 +85,7 @@ void GameScene::onClick(MouseEvent evnt) {
                     auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
                     a->angle = l.angle;
                     a->components.push_back(std::make_shared<TowerHealthBar>(b));
-                    a->components.push_back(std::make_shared<TowerAiComponent>(0.1,120));
+                    a->components.push_back(std::make_shared<TowerAiComponent>(25,120));
                     this->addObject(a);
                     // Remove funds
                     funds = (double)funds - selectedCost;

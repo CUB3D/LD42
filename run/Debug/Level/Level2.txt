@@ -7,7 +7,6 @@
 0 163 304 0
 0 338 310 0
 0 456 308 0
-
 ### Wave info format is count,delay(ms)
 3 200
 0 10000
