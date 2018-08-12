@@ -25,13 +25,12 @@ using namespace ::Unknown::Graphics;
 // TODO: moar tower bases
 //TODO: fix towers / enemies
 //TODO: if cant fix then change to having all towers die at the end of the wave
-//TODO: wave indicator / progress on ui
 
 
 
 int levelID = 1;
 
-Image background("res/Backgrounds/Flooding-Level-Bg.png");
+std::shared_ptr<Image> background;
 KeyBind key(SDLK_q, "edit");
 SharedVariable health("health", 10.0);
 SharedVariable funds("funds", 100.0);
@@ -49,7 +48,7 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
         selectedCost = 20.0;
     }
     if(evnt->componentName == "Reload") {
-        this->loadLevel();
+        this->advanceLevel();
     }
 
     printf("%d\n", selectedTower);
@@ -93,7 +92,7 @@ void GameScene::onClick(MouseEvent evnt) {
 }
 
 GameScene::GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font) : Scene("Game") {
-	//UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
+	UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
 
 	ui = Loader::loadUI("res/GameUI.json");
 	ui.setGlobalFont(font);
@@ -129,10 +128,13 @@ GameScene::GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font) : Scene(
 }
 
 void GameScene::loadLevel() {
+    printf("loading level %d\n", levelID);
+
     this->renderables.clear();
     this->updatables.clear();
     this->tagables.clear();
     std::string lvl = "Level/Level" + intToString(levelID) + ".txt";
+    background = std::make_shared<Image>("res/Backgrounds/" + intToString(levelID) + ".png");
 
     this->currentLevel = ::loadLevel(lvl);
 
@@ -146,7 +148,7 @@ void GameScene::loadLevel() {
 }
 
 void GameScene::render() const {
-    background.render(0, 0);
+    background->render(0, 0);
 
     Scene::render();
 
