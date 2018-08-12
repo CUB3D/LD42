@@ -93,35 +93,35 @@ void GameScene::onClick(MouseEvent evnt) {
 }
 
 GameScene::GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font) : Scene("Game") {
-	UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
+	//UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
 
 	ui = Loader::loadUI("res/GameUI.json");
 	ui.setGlobalFont(font);
 	ui.initUI();
 
-	auto x = [this](auto me) {
-        if(!e.edit)
-            return;
-
-        Unknown::Point<int> pos;
-        UK_GET_MOUSE_POS(pos);
-
-        printf("%d,%d\n", pos.x, pos.y);
-        levelElement e;
-        e.type = (Type)0;
-        e.x = pos.x;
-        e.y = pos.y;
-        e.angle = 0;
-        this->currentLevel.elements.push_back(e);
-
-
-        printf("## Format is Type, X, Y, angle (note first line is skipped)\n");
-        for(auto& a : this->currentLevel.elements) {
-            printf("%d %d %d %d\n", a.type, a.x, a.y, a.angle);
-        }
-    };
-
-    registerMouseListener(x, "editor");
+//	auto x = [this](auto me) {
+//        if(!e.edit)
+//            return;
+//
+//        Unknown::Point<int> pos;
+//        UK_GET_MOUSE_POS(pos);
+//
+//        printf("%d,%d\n", pos.x, pos.y);
+//        levelElement e;
+//        e.type = (Type)0;
+//        e.x = pos.x;
+//        e.y = pos.y;
+//        e.angle = 0;
+//        this->currentLevel.elements.push_back(e);
+//
+//
+//        printf("## Format is Type, X, Y, angle (note first line is skipped)\n");
+//        for(auto& a : this->currentLevel.elements) {
+//            printf("%d %d %d %d\n", a.type, a.x, a.y, a.angle);
+//        }
+//    };
+//
+//    registerMouseListener(x, "editor");
 
     UK_ADD_MOUSE_LISTENER_INTERNAL(onClick, "towerplace");
 

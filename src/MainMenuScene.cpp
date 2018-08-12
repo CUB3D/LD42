@@ -4,6 +4,14 @@
 
 #include "MainMenuScene.h"
 
-MainMenuScene::MainMenuScene(std::shared_ptr<Unknown::Graphics::TTFont> font) : Scene("MainMenu") {
+void ui(std::shared_ptr<Unknown::UIEvent> evt) {
+    if(evt->componentName == "PlayButton")
+        UK_LOAD_SCENE("Game");
+    if(evt->componentName == "QuitButton")
+        Unknown::getUnknown()->quit(0);
+}
 
+
+MainMenuScene::MainMenuScene(std::shared_ptr<Unknown::Graphics::TTFont> font) : MenuScene("MainMenu", "res/MainMenu.json", font) {
+    ::Unknown::registerUIListener(ui, "mainmenu");
 }
