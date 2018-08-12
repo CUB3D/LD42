@@ -32,4 +32,4 @@
 -147 428 0
 -35 438 0
 ### Background
-res/Backgrounds/Alien-Landings-BG.png
+res/Backgrounds/Alien-Landings-Bg.png

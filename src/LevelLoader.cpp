@@ -123,6 +123,7 @@ level loadLevel(const std::string &str) {
         }
 
         std::getline(stream, line);
+        printf("LevelString %s", line.c_str());
         l.imgPath = line;
     };
 

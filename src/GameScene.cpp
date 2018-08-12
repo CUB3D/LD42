@@ -140,8 +140,8 @@ void GameScene::loadLevel() {
     std::string lvl = "Level/Level" + intToString(levelID) + ".txt";
 
     this->currentLevel = ::loadLevel(lvl);
-
-    background = Image(currentLevel.imgPath);
+    //printf("LevelString %s", currentLevel..c_str());
+    background = Image(this->currentLevel.imgPath);
 
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
