@@ -13,6 +13,7 @@ class FailScene : public ::Unknown::Scene
 {
 public:
     Image background;
+    bool soundPlayed;
 
     FailScene();
     virtual void render() const override;

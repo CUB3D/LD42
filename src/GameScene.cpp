@@ -142,7 +142,7 @@ void GameScene::loadLevel() {
     this->currentLevel = ::loadLevel(lvl);
     //printf("LevelString %s", currentLevel..c_str());
     background = Image(this->currentLevel.imgPath);
-
+    background = Image("res/Backgrounds/" + intToString(levelID) + ".png");
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
             auto ent = UK_LOAD_ENTITY_AT("Entities/Tower_Base.json", element.x, element.y);

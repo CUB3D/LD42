@@ -8,6 +8,7 @@
 #include "Loader.h"
 #include "AnimationHelper.h"
 #include "Entity/AnimationRenderComponent.h"
+#include "Sounds.h"
 
 void TowerHealthBar::update(Entity &ent) {
     if(this->health <= 0) {
@@ -20,6 +21,8 @@ void TowerHealthBar::update(Entity &ent) {
         auto ded = ::Unknown::Loader::loadEntityAt("Entities/TurretDead.json", *scene, ent.position.x, ent.position.y);
         ded->components.push_back(std::make_shared<Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
         scene->addObject(ded);
+
+        Sounds::getSounds().towerDestroy.playSingle();
     }
 }
 
