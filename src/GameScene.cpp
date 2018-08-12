@@ -48,7 +48,7 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
         selectedCost = 20.0;
     }
     if(evnt->componentName == "Reload") {
-        this->advanceLevel();
+        this->loadLevel();
     }
     if(evnt->componentName =="NextLevel")
     {
@@ -138,10 +138,13 @@ void GameScene::loadLevel() {
     this->updatables.clear();
     this->tagables.clear();
     std::string lvl = "Level/Level" + intToString(levelID) + ".txt";
-    background = std::make_shared<Image>("res/Backgrounds/" + intToString(levelID) + ".png");
 
     this->currentLevel = ::loadLevel(lvl);
-    Image background(this->currentLevel.imgPath);
+
+
+
+    background = std::make_shared<Image>(currentLevel.imgPath);
+
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
             auto ent = UK_LOAD_ENTITY_AT("Entities/Tower_Base.json", element.x, element.y);

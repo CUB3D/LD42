@@ -99,6 +99,10 @@ level loadLevel(const std::string &str) {
             std::stringstream ls(line);
 
             while (std::getline(ls, part, ' ')) {
+                if(part == "###") {
+                    goto load_bg;
+                }
+
                 int num;
                 std::stringstream ss;
                 ss << part;
@@ -108,43 +112,19 @@ level loadLevel(const std::string &str) {
         }
     }
 
-    for(int i = 0; i < nums.size(); i+=3) {
-        pathNode node;
-        node.x = nums[i];
-        node.y = nums[i+1];
-        node.angle = nums[i+2];
-        l.pathingNodes.push_back(node);
-    }
-    std::getline(stream, line);
-    printf("Skipping A %s\n", line.c_str());
-    std::getline(stream, line);
-    l.imgPath = line;
+    load_bg: { //Also loads pathing nodes
 
+        for(int i = 0; i < nums.size(); i+=3) {
+            pathNode node;
+            node.x = nums[i];
+            node.y = nums[i + 1];
+            node.angle = nums[i + 2];
+            l.pathingNodes.push_back(node);
+        }
 
-
-
-
-//        int data[3];
-//        for(int i = 0; i < 3; i++) {
-//            stream >> line;
-//            if(line == "###") { // Marks the end of this block
-//                //goto loadpos;
-//            }
-//            ss << line;
-//            ss >> data[i];
-//            printf("%s = %d", line.c_str(), data[i]);
-//            ss.clear();
-//        }
-//
-//        pathNode node;
-//        node.x = data[0];
-//        node.y = data[1];
-//        node.angle = data[2];
-//
-//        printf("Pathing node: %d %d\n", node.x, node.y);
-//
-//        l.pathingNodes.push_back(node);
-    //}
+        std::getline(stream, line);
+        l.imgPath = line;
+    };
 
     return l;
 }
