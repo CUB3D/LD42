@@ -7,7 +7,6 @@
 0 163 304 0
 0 338 310 0
 0 456 308 0
-
 ### Wave info format is count,delay(ms)
 3 200
 0 10000
@@ -15,7 +14,7 @@
 0 10000
 10 300
 ### Spawn pos
-488 59 0
+488 59
 ### Pathing nodes (x, y, angle)
 0 62 0
 -133 5 0
@@ -32,3 +31,5 @@
 -93 7 0
 -137 5 0
 -112 10 0
+### Background
+res/Backgrounds/Alien-Landings-Bg.png

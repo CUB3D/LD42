@@ -50,6 +50,10 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
     if(evnt->componentName == "Reload") {
         this->advanceLevel();
     }
+    if(evnt->componentName =="NextLevel")
+    {
+        this->advanceLevel();
+    }
 
     printf("%d\n", selectedTower);
 }
@@ -80,7 +84,7 @@ void GameScene::onClick(MouseEvent evnt) {
                     auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
                     a->angle = l.angle;
                     a->components.push_back(std::make_shared<TowerHealthBar>(b));
-                    a->components.push_back(std::make_shared<TowerAiComponent>(0.1,120));
+                    a->components.push_back(std::make_shared<TowerAiComponent>(25,120));
                     this->addObject(a);
                     // Remove funds
                     funds = (double)funds - selectedCost;
@@ -137,7 +141,7 @@ void GameScene::loadLevel() {
     background = std::make_shared<Image>("res/Backgrounds/" + intToString(levelID) + ".png");
 
     this->currentLevel = ::loadLevel(lvl);
-
+    Image background(this->currentLevel.imgPath);
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
             auto ent = UK_LOAD_ENTITY_AT("Entities/Tower_Base.json", element.x, element.y);

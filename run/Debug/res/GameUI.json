@@ -16,6 +16,12 @@
     "Content": "Reload",
     "Bounds": ["minX+125", "minY+10", 100, 25]
   },
+  "NextLevel": {
+    "Type": "Button",
+    "InsideComponent": "Background",
+    "Content": "Next Level",
+    "Bounds": ["minX+250", "minY+10",100,25]
+  },
   "HealthText": {
     "Type": "Text",
     "InsideComponent": "Background",
