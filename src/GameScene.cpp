@@ -117,7 +117,7 @@ GameScene::GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font) : Scene(
 
         printf("## Format is Type, X, Y, angle (note first line is skipped)\n");
         for(auto& a : this->currentLevel.elements) {
-            printf("%d %d %d %d\n", a.type, a.x, a.y, a.angle);
+            printf("%d %d %d %lf\n", a.type, a.x, a.y, a.angle);
         }
     };
 
@@ -191,7 +191,7 @@ void GameScene::advanceLevel() {
     levelID++;
 
     //TODO: update this to represent the end
-    if(levelID == 2) {
+    if(levelID == 3) {
         UK_LOAD_SCENE("Win");
         return;
     }
