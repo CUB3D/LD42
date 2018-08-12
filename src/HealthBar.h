@@ -6,6 +6,7 @@
 #define UNKNOWN_GAME_HEALTHBAR_H
 
 #include "Entity/Component.h"
+#include "Font.h"
 
 using namespace ::Unknown;
 
@@ -13,6 +14,7 @@ class HealthBar : public ::Unknown::Component
 {
 public:
     double health;
+    std::shared_ptr<::Unknown::Graphics::TTFont> font;
 
     HealthBar();
 

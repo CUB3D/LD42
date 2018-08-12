@@ -6,6 +6,7 @@
 #define UNKNOWN_GAME_TOWERHEALTHBAR_H
 
 #include "HealthBar.h"
+#include "Font.h"
 
 class TowerHealthBar : public HealthBar
 {

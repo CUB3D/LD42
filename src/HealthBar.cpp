@@ -15,7 +15,24 @@ void HealthBar::render(const Entity &ent, double Xoffset, double Yoffset) const 
     UK_DRAW_RECT(ent.position.x, ent.position.y + offset, 25, height, Colour::RED);
     UK_DRAW_RECT(ent.position.x, ent.position.y + offset, health, height, Colour::GREEN);
 
-    ::Unknown::Graphics::drawCircle(ent.position.x + 24, ent.position.y - 16, 100, Colour::RED);
+    ::Unknown::Graphics::drawCircle(ent.position.x + 24, ent.position.y - 16, 80, Colour::RED);
+
+    auto ants = Unknown::getUnknown()->globalSceneManager.getScene<Unknown::Scene>()->getObjects<Unknown::Entity>("TowerBody");
+
+    for(auto& obj : ants) {
+        if(!obj->enabled)
+            continue;
+        // Get the component etc
+        double dist = sqrt(pow(obj->position.x - (ent.position.x + 24),2) + pow(obj->position.y - (ent.position.y + 8),2));
+
+        if (dist <= 80) {
+            ::Unknown::Graphics::drawLine(ent.position.x + 24, ent.position.y + 8, obj->position.x, obj->position.y, ::Unknown::Colour::GREEN);
+        } else {
+            ::Unknown::Graphics::drawLine(ent.position.x + 24, ent.position.y+ 8, obj->position.x, obj->position.y, ::Unknown::Colour::RED);
+        }
+
+        font->drawString(intToString(dist), ent.position.x, ent.position.y);
+    }
 }
 
 void HealthBar::update(Entity &ent) {
@@ -29,4 +46,6 @@ void HealthBar::update(Entity &ent) {
     }
 }
 
-HealthBar::HealthBar() : health(25) {}
+HealthBar::HealthBar() : health(25) {
+    font = std::make_shared<Unknown::Graphics::TTFont>("res/Fonts/Arimo-Regular.ttf", 12, UK_COLOUR_RGB(0, 255, 0));
+}
