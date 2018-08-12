@@ -21,9 +21,13 @@ using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
 //TODO: load next level when this one is done
-// TODO: kill enemies
-//TODO: turrets can be attacked
-//TODO: destroyed turret
+// TODO: moar levels
+// TODO: moar tower bases
+//TODO: fix towers / enemies
+//TODO: if cant fix then change to having all towers die at the end of the wave
+//TODO: wave indicator / progress on ui
+
+
 
 int levelID = 1;
 
@@ -31,6 +35,8 @@ Image background("res/Backgrounds/Flooding-Level-Bg.png");
 KeyBind key(SDLK_q, "edit");
 SharedVariable health("health", 10.0);
 SharedVariable funds("funds", 100.0);
+SharedVariable currentWave("currentWave", 0.0);
+SharedVariable maxWave("maxWave", 0.0);
 
 int selectedTower = 0;
 double selectedCost = 20.0;
@@ -75,7 +81,7 @@ void GameScene::onClick(MouseEvent evnt) {
                     auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
                     a->angle = l.angle;
                     a->components.push_back(std::make_shared<TowerHealthBar>(b));
-                    a->components.push_back(std::make_shared<TowerAiComponent>(0.1,150));
+                    a->components.push_back(std::make_shared<TowerAiComponent>(0.1,120));
                     this->addObject(a);
                     // Remove funds
                     funds = (double)funds - selectedCost;
@@ -162,6 +168,9 @@ void GameScene::update() {
         e.edit = true;
 
     logic.update(currentLevel, *this);
+
+    currentWave = logic.currentWave;
+    maxWave = currentLevel.waves.size();
 
     bool allAntsDead = true;
     for(auto& ant : this->getObjects<Unknown::Entity>("Ant")) {

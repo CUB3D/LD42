@@ -20,7 +20,7 @@ void TowerAiComponent::update(Unknown::Entity &ent)
         if(!obj->enabled)
             continue;
         // Get the component etc
-        double dist = sqrt(pow(obj->position.x - ent.position.x,2) + pow(obj->position.x - ent.position.y,2));
+        double dist = sqrt(pow(obj->position.x - (ent.position.x + 24),2) + pow(obj->position.x - (ent.position.y + 90),2));
 
         if (dist < minDist && dist < range) {
             minDist = dist;
@@ -30,7 +30,6 @@ void TowerAiComponent::update(Unknown::Entity &ent)
     if (TargetObj)
     {
         auto targetBar = TargetObj->getComponent<HealthBar>();
-        printf("Doing %lf\n", rate);
         targetBar->health -= rate;
     }
 }

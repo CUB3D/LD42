@@ -14,6 +14,8 @@ void HealthBar::render(const Entity &ent, double Xoffset, double Yoffset) const 
     int offset = 32;
     UK_DRAW_RECT(ent.position.x, ent.position.y + offset, 25, height, Colour::RED);
     UK_DRAW_RECT(ent.position.x, ent.position.y + offset, health, height, Colour::GREEN);
+
+    ::Unknown::Graphics::drawCircle(ent.position.x + 24, ent.position.y - 16, 100, Colour::RED);
 }
 
 void HealthBar::update(Entity &ent) {

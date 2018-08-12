@@ -26,7 +26,7 @@ void AntAiComponent::update(Unknown::Entity &ent) {
         if(!obj->enabled)
             continue;
         // Get the component etc
-        double dist = sqrt(pow(obj->position.x - ent.position.x,2) + pow(obj->position.x - ent.position.y,2));
+        double dist = sqrt(pow(obj->position.x - (ent.position.x + 24),2) + pow(obj->position.x - (ent.position.y - 16),2));
 
         if (dist < minDist && dist < MAX_DIST) {
             minDist = dist;
@@ -34,7 +34,6 @@ void AntAiComponent::update(Unknown::Entity &ent) {
         }
     }
     if (TargetObj) {
-        printf("have target\n");
         auto targetBar = TargetObj->getComponent<TowerHealthBar>();
         if(targetBar) {
             targetBar->health -= rate;
