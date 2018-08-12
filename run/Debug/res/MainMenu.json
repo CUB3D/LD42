@@ -1,0 +1,20 @@
+{
+  "BGImg": {
+    "Type": "Image",
+    "Bounds": [0, 0, -1, -1],
+    "Content": "res/MainMenu.png"
+  },
+  "PlayButton": {
+    "Type": "Button",
+    "InsideComponent": "BGImg",
+    "Content": "Play",
+    "Bounds": ["minX+220", "minY+250", 200, 75]
+  },
+  "QuitButton": {
+    "Type": "Button",
+    "InsideComponent": "BGImg",
+    "Colour": "FF00000",
+    "Content": "Quit",
+    "Bounds": ["minX+220", "minY+350", 200, 75]
+  }
+}

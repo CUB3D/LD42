@@ -97,7 +97,7 @@ void GameScene::onClick(MouseEvent evnt) {
 }
 
 GameScene::GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font) : Scene("Game") {
-	UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
+	//UK_ADD_UI_LISTENER_INTERNAL(uiCallback, "uicallback");
 
 	ui = Loader::loadUI("res/GameUI.json");
 	ui.setGlobalFont(font);
@@ -121,7 +121,7 @@ GameScene::GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font) : Scene(
 
         printf("## Format is Type, X, Y, angle (note first line is skipped)\n");
         for(auto& a : this->currentLevel.elements) {
-            printf("%d %d %d %lf\n", a.type, a.x, a.y, a.angle);
+            printf("%d %d %d %d\n", a.type, a.x, a.y, a.angle);
         }
     };
 
@@ -173,8 +173,8 @@ void GameScene::update() {
 
     logic.update(currentLevel, *this);
 
-    currentWave = logic.currentWave;
-    maxWave = currentLevel.waves.size();
+    currentWave = (double) logic.currentWave;
+    maxWave = (double) currentLevel.waves.size();
 
     bool allAntsDead = true;
     for(auto& ant : this->getObjects<Unknown::Entity>("Ant")) {

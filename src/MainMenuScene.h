@@ -8,7 +8,7 @@
 #include "Scene/Scene.h"
 #include "Font.h"
 
-class MainMenuScene : public ::Unknown::Scene
+class MainMenuScene : public ::Unknown::MenuScene
 {
 public:
     MainMenuScene(std::shared_ptr<Unknown::Graphics::TTFont> font);
