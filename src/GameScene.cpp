@@ -141,8 +141,6 @@ void GameScene::loadLevel() {
 
     this->currentLevel = ::loadLevel(lvl);
 
-
-
     background = Image(currentLevel.imgPath);
 
     for(levelElement& element : this->currentLevel.elements) {
@@ -152,6 +150,8 @@ void GameScene::loadLevel() {
             this->addObject(ent);
         }
     }
+
+    this->logic.reset();
 }
 
 void GameScene::render() const {
@@ -178,7 +178,7 @@ void GameScene::update() {
 
     logic.update(currentLevel, *this);
 
-    currentWave = (double) logic.currentWave;
+    currentWave = (double) (logic.currentWave + 1);
     maxWave = (double) currentLevel.waves.size();
 
     bool allAntsDead = true;
