@@ -19,6 +19,7 @@ public:
     WAVSound build;
     WAVSound death;
     WAVSound zap;
+    WAVSound repair;
 
     static Sounds& getSounds();
 
@@ -30,7 +31,8 @@ protected:
     wavestart("res/audio/wavestart.wav"),
     build("res/audio/build.wav"),
     death("res/audio/death.wav"),
-    zap("res/audio/zap.wav")
+    zap("res/audio/zap.wav"),
+    repair("res/audio/repair.wav")
     {}
 };
 

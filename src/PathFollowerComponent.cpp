@@ -16,7 +16,9 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
 
 
     // Turn to face node
-    ent.angle = atan2(ent.position.y - endY, ent.position.x - endX);
+    int diffY = ent.position.y - endY;
+    int diffX = ent.position.x - endX;
+    ent.angle = atan2(diffY, diffX);
 
 
     double delta = 0.16;

@@ -113,5 +113,11 @@
     "InsideComponent": "Background",
     "Content": "Tesla",
     "Bounds": ["minX+125", "minY+50", 100, 25]
+  },
+  "Repair": {
+    "Type": "Button",
+    "InsideComponent": "Background",
+    "Content": "Repair",
+    "Bounds": ["minX+250", "minY+50", 100, 25]
   }
 }

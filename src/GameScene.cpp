@@ -24,8 +24,8 @@ using namespace ::Unknown::Graphics;
 
 // TODO: repair packs
 //TODO: Real win/ loss screens (scott)
-
-
+//TODO: costs below stuff
+//TODO: death animations (ant and tower)
 
 int levelID = 1;
 
@@ -50,6 +50,10 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
         selectedTower = 1;
         selectedCost = 50;
     }
+    if(evnt->componentName == "Repair") {
+        selectedTower = 2;
+        selectedCost = 100;
+    }
     if(evnt->componentName =="NextLevel")
     {
         this->advanceLevel();
@@ -68,8 +72,29 @@ void GameScene::onClick(MouseEvent evnt) {
 
     int x = evnt.location.x;
     int y = evnt.location.y;
+
+    // TODO: out of mon sound
     if((double)funds >= selectedCost) {
         // Find which base is being clicked
+
+        if(selectedTower == 2) { // repair
+            for(auto& l : this->getObjects<Entity>("TowerBody")) {
+                auto hb = l->getComponent<TowerHealthBar>();
+                if(!hb)
+                    continue;
+                if(hb->health < 25 && hb->health > 0) {
+                    hb->health = 25;
+
+                    // Repair sound
+                    Sounds::getSounds().repair.playSingle();
+
+                    funds = (double) funds - selectedCost;
+
+                    continue;
+                }
+            }
+        }
+
         for (auto &l : this->currentLevel.elements) {
             if(l.placed) {
                 continue;
@@ -198,12 +223,9 @@ void GameScene::render() const {
         tower->render(0, 0);
     }
 
-    // TODO: do this for destroyed ones too
-    //TODO: play death sound for ant
-    // Add moar towers
-    //TODO: dead towers dont render anymore, why?
-    //remove debug
-    //TODO: death animations
+    for(auto& tower : getObjects<IRenderable>("TowerDead")) {
+        tower->render(0, 0);
+    }
 
 
     ui.render(0, 0);
