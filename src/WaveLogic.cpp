@@ -48,7 +48,7 @@ void WaveLogic::update(level level, Scene &scene) {
                 Sounds::getSounds().wavestart.playSingle();
 
                 //If on level2 spawn lander randomly
-                if(currentLevel == 1 && currentWave > 0) {
+                if(currentLevel == 1 && currentWave > 1) {
                     auto& nodes = level.pathingNodes;
                     auto& node = nodes[RANDINT(0, nodes.size())];
 

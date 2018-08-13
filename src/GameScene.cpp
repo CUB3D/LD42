@@ -131,7 +131,9 @@ void GameScene::onClick(MouseEvent evnt) {
                         auto b = UK_LOAD_ENTITY_AT("Entities/Tower_Tesla.json", l.x + 16, l.y - 24);
                         //TODO: less health more damage
                         b->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
-                        //TODO: death animation
+                            auto scene = ::Unknown::getUnknown().globalSceneManager.getScene<Scene>();
+                            auto ded = ::Unknown::Loader::loadEntityAt("Entities/TeslaDea.json", *scene, ent.position.x - 5, ent.position.y);
+                            scene->addObject(ded);
                         }));
                         b->components.push_back(std::make_shared<TowerAiComponent>(0.65, 85));
                         this->addObject(b);

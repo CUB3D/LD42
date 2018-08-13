@@ -32,6 +32,7 @@ void LanderAIComponent::update(Unknown::Entity &ent) {
         scene->addObject(en);
 
         //TODO: explode and dissapear
+        //
 
         this->toSpawn--;
     }
