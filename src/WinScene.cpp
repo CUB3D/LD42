@@ -6,7 +6,7 @@
 #include "Loader.h"
 #include "CircleCollider.h"
 
-WinScene::WinScene() : Scene("Win"), img("res/Tower.png"), timer(0.15f) {
+WinScene::WinScene() : Scene("Win"), img("res/crappy win screen.png"), timer(0.15f) {
     this->addObject(UK_LOAD_ENTITY("Entities/EndGround.json"));
 }
 
