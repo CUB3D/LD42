@@ -34,6 +34,7 @@ void AntAiComponent::update(Unknown::Entity &ent) {
             TargetObj = obj;
         }
     }
+
     if (TargetObj) {
         auto targetBar = TargetObj->getComponent<TowerHealthBar>();
         if(targetBar) {
@@ -43,8 +44,6 @@ void AntAiComponent::update(Unknown::Entity &ent) {
         }
     } else {
         pathingcomp->stopped = false;
-
-
     }
 }
 AntAiComponent::AntAiComponent(struct level leve, double rate) : curlvl(leve), rate(rate) {
