@@ -7,7 +7,7 @@
 #include "Timer.h"
 
 Unknown::Graphics::Image instructions("res/instructions.png");
-Unknown::Timer t(0.2f);
+Unknown::Timer t(0.4f);
 bool b = false;
 
 
