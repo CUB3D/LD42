@@ -17,6 +17,7 @@ public:
 
     FailScene();
     virtual void render() const override;
+    virtual void update() override;
 };
 
 

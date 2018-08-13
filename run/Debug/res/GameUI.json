@@ -1,20 +1,14 @@
 {
   "Background": {
-    "Type": "Rect",
+    "Type": "Image",
     "Bounds": [0, 480, -1, -1],
-    "Colour": "FF00FF"
+    "Content": "res/UIBG.png"
   },
   "Tower1": {
     "Type": "Button",
     "InsideComponent": "Background",
-    "Content": "Select tower 1",
-    "Bounds": ["minX+10", "minY+10", 100, 25]
-  },
-  "Reload": {
-    "Type": "Button",
-    "InsideComponent": "Background",
-    "Content": "Reload",
-    "Bounds": ["minX+125", "minY+10", 100, 25]
+    "Content": "Gun Turret",
+    "Bounds": ["minX+10", "minY+50", 100, 25]
   },
   "NextLevel": {
     "Type": "Button",
@@ -22,14 +16,36 @@
     "Content": "Next Level",
     "Bounds": ["minX+250", "minY+10",100,25]
   },
+  "HeartImg": {
+    "Type": "Image",
+    "InsideComponent": "Background",
+    "Content": "res/heart.png",
+    "Bounds": [
+      "minX+10",
+      "minY+80",
+      "maxX-20",
+      0
+    ]
+  },
   "HealthText": {
     "Type": "Text",
     "InsideComponent": "Background",
     "Colour": "ff000000",
-    "Content": "Health: ${health}",
+    "Content": "${health}",
+    "Bounds": [
+      "minX+30",
+      "minY+80",
+      "maxX-20",
+      0
+    ]
+  },
+  "CoinImg": {
+    "Type": "Image",
+    "InsideComponent": "Background",
+    "Content": "res/coin.png",
     "Bounds": [
       "minX+10",
-      "minY+60",
+      "minY+100",
       "maxX-20",
       0
     ]
@@ -38,10 +54,10 @@
     "Type": "Text",
     "InsideComponent": "Background",
     "Colour": "ff000000",
-    "Content": "Funds: ${funds}",
+    "Content": "${funds}",
     "Bounds": [
-      "minX+10",
-      "minY+80",
+      "minX+30",
+      "minY+100",
       "maxX-20",
       0
     ]
@@ -53,7 +69,7 @@
     "Content": "Wave: ${currentWave} / ",
     "Bounds": [
       "minX+10",
-      "minY+100",
+      "minY+120",
       "maxX-20",
       0
     ]
@@ -65,9 +81,37 @@
     "Content": "${maxWave}",
     "Bounds": [
       "minX+75",
-      "minY+100",
+      "minY+120",
       "maxX-20",
       0
     ]
+  },
+  "T1Img": {
+    "Type": "Image",
+    "InsideComponent": "Background",
+    "Content": "res/T1Img.png",
+    "Bounds": [
+      "minX+44",
+      "minY+10",
+      "maxX-20",
+      0
+    ]
+  },
+  "T2Img": {
+    "Type": "Image",
+    "InsideComponent": "Background",
+    "Content": "res/T2Img.png",
+    "Bounds": [
+      "minX+150",
+      "minY+10",
+      "maxX-20",
+      0
+    ]
+  },
+  "Tower2": {
+    "Type": "Button",
+    "InsideComponent": "Background",
+    "Content": "Tesla",
+    "Bounds": ["minX+125", "minY+50", 100, 25]
   }
 }

@@ -23,7 +23,8 @@ void AntAiComponent::update(Unknown::Entity &ent) {
     std::shared_ptr<Unknown::Entity> TargetObj = nullptr;
 
     for(auto& obj : towers) {
-        if(!obj->enabled)
+        auto thb = obj->getComponent<TowerHealthBar>();
+        if(!obj->enabled || !thb || thb->health <= 0)
             continue;
         // Get the component etc
         double dist = sqrt(pow(obj->position.x - (ent.position.x + 24),2) + pow(obj->position.y - (ent.position.y + 8),2));

@@ -12,11 +12,12 @@ using namespace ::Unknown;
 class Sounds
 {
 public:
-    WAVSound loss;
-    WAVSound gun;
-    WAVSound towerDestroy;
-    WAVSound wavestart;
-    WAVSound build;
+    WAVSound loss; // Y
+    WAVSound gun; // N
+    WAVSound towerDestroy; // Y
+    WAVSound wavestart; // N
+    WAVSound build; // Y
+    WAVSound death; // Y
 
     static Sounds& getSounds();
 
@@ -26,7 +27,8 @@ protected:
     gun("res/audio/gun.wav"),
     towerDestroy("res/audio/towerdestroy.wav"),
     wavestart("res/audio/wavestart.wav"),
-    build("res/audio/build.wav")
+    build("res/audio/build.wav"),
+    death("res/audio/death.wav")
     {}
 };
 

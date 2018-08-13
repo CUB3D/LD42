@@ -15,12 +15,8 @@ void TowerHealthBar::update(Entity &ent) {
         ent.queueDisable();
         turret->queueDisable();
 
-        auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
-
-        //TODO: way to load from json
-        auto ded = ::Unknown::Loader::loadEntityAt("Entities/TurretDead.json", *scene, ent.position.x, ent.position.y);
-        ded->components.push_back(std::make_shared<Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
-        scene->addObject(ded);
+        if(func)
+            func(ent);
 
         Sounds::getSounds().towerDestroy.playSingle();
     }
@@ -37,5 +33,6 @@ void TowerHealthBar::render(const Entity &ent, double Xoffset, double Yoffset) c
     //::Unknown::Graphics::drawCircle(ent.position.x + 24, ent.position.y + 90, 120, Colour::BLUE);
 }
 
-TowerHealthBar::TowerHealthBar(std::shared_ptr<Entity> turret) : turret(turret) {
+TowerHealthBar::TowerHealthBar(std::shared_ptr<Entity> turret, std::function<void(Entity& ent)> func)
+    : turret(turret), func(func) {
 }

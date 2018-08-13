@@ -15,16 +15,17 @@
 #include "Font.h"
 #include "Sounds.h"
 #include "TowerAiComponent.h"
+#include "Entity/AnimationRenderComponent.h"
+#include "AnimationHelper.h"
 
 
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
-//TODO: load next level when this one is done
-// TODO: moar levels
 // TODO: moar tower bases
 //TODO: fix towers / enemies
-//TODO: if cant fix then change to having all towers die at the end of the wave
+// TODO: repair packs
+//TODO: Real win/ loss screens (scott)
 
 
 
@@ -37,7 +38,7 @@ SharedVariable funds("funds", 100.0);
 SharedVariable currentWave("currentWave", 0.0);
 SharedVariable maxWave("maxWave", 0.0);
 
-int selectedTower = 0;
+int selectedTower = -1;
 double selectedCost = 20.0;
 
 UIContainer ui;
@@ -47,8 +48,9 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
         selectedTower = 0;
         selectedCost = 20.0;
     }
-    if(evnt->componentName == "Reload") {
-        this->loadLevel();
+    if(evnt->componentName == "Tower2") {
+        selectedTower = 1;
+        selectedCost = 50;
     }
     if(evnt->componentName =="NextLevel")
     {
@@ -61,6 +63,9 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
 void GameScene::onClick(MouseEvent evnt) {
     // Is it on a tower
     if(evnt.buttonState != PRESSED)
+        return;
+
+    if(selectedTower < 0)
         return;
 
     int x = evnt.location.x;
@@ -76,19 +81,38 @@ void GameScene::onClick(MouseEvent evnt) {
                 if (y > l.y && y < l.y + 16) {
                     Sounds::getSounds().build.playSingle();
 
-                    // gun
-                    auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
-                    b->angle = l.angle;
-                    this->addObject(b);
-                    // Add the tower
-                    auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
-                    a->angle = l.angle;
-                    a->components.push_back(std::make_shared<TowerHealthBar>(b));
-                    a->components.push_back(std::make_shared<TowerAiComponent>(0.4,140));
-                    this->addObject(a);
-                    // Remove funds
-                    funds = (double)funds - selectedCost;
-                    l.placed = true;
+                    if(selectedTower == 0) {
+                        // gun
+                        auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
+                        b->angle = l.angle;
+                        this->addObject(b);
+                        // Add the tower
+                        auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
+                        a->angle = l.angle;
+                        a->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
+                            auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
+                            auto ded = ::Unknown::Loader::loadEntityAt("Entities/TurretDead.json", *scene, ent.position.x - 5, ent.position.y);
+                            //TODO: way to load from json
+                            ded->components.push_back(std::make_shared<::Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
+                            scene->addObject(ded);
+                        }));
+                        a->components.push_back(std::make_shared<TowerAiComponent>(0.4, 140));
+                        this->addObject(a);
+                        // Remove funds
+                        funds = (double) funds - selectedCost;
+                        l.placed = true;
+                    }
+                    if(selectedTower == 1) {
+                        // Tesla
+                        auto b = UK_LOAD_ENTITY_AT("Entities/Tower_Tesla.json", l.x - 16, l.y - 91);
+                        b->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
+                        //TODO: death animation
+                        }));
+                        this->addObject(b);
+
+                        funds = (double) funds - selectedCost;
+                        l.placed = true;
+                    }
                 }
             }
         }
@@ -172,6 +196,7 @@ void GameScene::render() const {
     // Add moar towers
     //TODO: dead towers dont render anymore, why?
     //remove debug
+    //TODO: death animations
 
 
     ui.render(0, 0);

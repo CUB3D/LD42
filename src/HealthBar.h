@@ -14,7 +14,6 @@ class HealthBar : public ::Unknown::Component
 {
 public:
     double health;
-    std::shared_ptr<::Unknown::Graphics::TTFont> font;
 
     HealthBar();
 
