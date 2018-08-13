@@ -22,8 +22,6 @@
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
-// TODO: moar tower bases
-//TODO: fix towers / enemies
 // TODO: repair packs
 //TODO: Real win/ loss screens (scott)
 
@@ -74,14 +72,13 @@ void GameScene::onClick(MouseEvent evnt) {
         // Find which base is being clicked
         for (auto &l : this->currentLevel.elements) {
             if(l.placed) {
-                //TODO: thunk
                 continue;
             }
+
             if (x > l.x && x < l.x + 64) {
                 if (y > l.y && y < l.y + 16) {
-                    Sounds::getSounds().build.playSingle();
-
                     if(selectedTower == 0) {
+                        //TODO: less damage more health
                         // gun
                         auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
                         b->angle = l.angle;
@@ -98,6 +95,10 @@ void GameScene::onClick(MouseEvent evnt) {
                         }));
                         a->components.push_back(std::make_shared<TowerAiComponent>(0.4, 140));
                         this->addObject(a);
+
+
+                        Sounds::getSounds().build.playSingle();
+
                         // Remove funds
                         funds = (double) funds - selectedCost;
                         l.placed = true;
@@ -105,11 +106,16 @@ void GameScene::onClick(MouseEvent evnt) {
                     if(selectedTower == 1) {
                         // Tesla
                         auto b = UK_LOAD_ENTITY_AT("Entities/Tower_Tesla.json", l.x - 16, l.y - 91);
+                        //TODO: less health more damage
                         b->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
                         //TODO: death animation
                         }));
+                        b->components.push_back(std::make_shared<TowerAiComponent>(0.65, 150));
                         this->addObject(b);
 
+                        Sounds::getSounds().zap.playSingle();
+
+                        // funds
                         funds = (double) funds - selectedCost;
                         l.placed = true;
                     }
