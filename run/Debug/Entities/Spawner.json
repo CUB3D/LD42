@@ -1,0 +1,11 @@
+{
+  "Tag": "Spawner",
+  "Width": 10,
+  "Height":  10,
+  "Components": {
+    "img": {
+      "Type": "ImageRenderer",
+      "File": "res/LanderShip.png"
+    }
+  }
+}

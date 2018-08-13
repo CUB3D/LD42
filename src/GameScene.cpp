@@ -24,11 +24,8 @@ using namespace ::Unknown::Graphics;
 
 //TODO: Real win/ loss screens (scott)
 //TODO: death animations (ant and tower)
-//TODO Ants dont take damage on lvl 2
 //TODO: ants with powerups (+ health/extra money when killed)
-//TODO: alien landings (extra spawners
-//Intro explanation screen
-
+//TODO: fix sprite offsets
 int levelID = 1;
 
 Image background("res/Backgrounds/1.png");
@@ -106,11 +103,11 @@ void GameScene::onClick(MouseEvent evnt) {
                     if(selectedTower == 0) {
                         //TODO: less damage more health
                         // gun
-                        auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
+                        auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x, l.y - 24);
                         b->angle = l.angle;
                         this->addObject(b);
                         // Add the tower
-                        auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
+                        auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x + 16, l.y - 24);
                         a->angle = l.angle;
                         a->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
                             auto scene = ::Unknown::getUnknown().globalSceneManager.getScene<Scene>();
@@ -131,7 +128,7 @@ void GameScene::onClick(MouseEvent evnt) {
                     }
                     if(selectedTower == 1) {
                         // Tesla
-                        auto b = UK_LOAD_ENTITY_AT("Entities/Tower_Tesla.json", l.x - 16, l.y - 91);
+                        auto b = UK_LOAD_ENTITY_AT("Entities/Tower_Tesla.json", l.x + 16, l.y - 24);
                         //TODO: less health more damage
                         b->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
                         //TODO: death animation

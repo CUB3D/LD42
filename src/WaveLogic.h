@@ -18,6 +18,7 @@ public:
     int currentWavePosition;
     int currentWave;
     bool doneSpawning;
+    int currentLevel;
 
     WaveLogic();
 

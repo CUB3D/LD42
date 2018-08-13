@@ -20,7 +20,7 @@ void TowerAiComponent::update(Unknown::Entity &ent)
         if(!obj->enabled)
             continue;
         // Get the component etc
-        double dist = sqrt(pow(obj->position.x - (ent.position.x + 24),2) + pow(obj->position.x - (ent.position.y + 90),2));
+        double dist = sqrt(pow(obj->position.x - (ent.position.x + 16),2) + pow(obj->position.x - (ent.position.y + 24),2));
 
         if (dist < minDist && dist < range) {
             minDist = dist;

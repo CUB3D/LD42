@@ -10,6 +10,7 @@
 #include "HealthBar.h"
 #include "GameScene.h"
 #include "Sounds.h"
+#include "LanderAIComponent.h"
 
 
 void WaveLogic::update(level level, Scene &scene) {
@@ -42,14 +43,29 @@ void WaveLogic::update(level level, Scene &scene) {
 
             if(currentWave == level.waves.size()) {
                 doneSpawning = true;
+                currentLevel++;
             } else { // Play wave start for the next wave
                 Sounds::getSounds().wavestart.playSingle();
+
+                //If on level2 spawn lander randomly
+                if(currentLevel == 1 && currentWave > 0) {
+                    auto& nodes = level.pathingNodes;
+                    auto& node = nodes[RANDINT(0, nodes.size())];
+
+
+                    auto scene = ::Unknown::getUnknown().globalSceneManager.getScene<Scene>();
+                    auto ded = ::Unknown::Loader::loadEntityAt("Entities/Spawner.json", *scene, node.x, node.y - 40);
+                    ded->components.push_back(std::make_shared<LanderAIComponent>(40));
+                    //TODO: way to load from json
+                    //ded->components.push_back(std::make_shared<::Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
+                    scene->addObject(ded);
+                }
             }
         }
     }
 }
 
-WaveLogic::WaveLogic() : currentWavePosition(0), currentWave(0), spawnTimer((float)-1), doneSpawning(false) {
+WaveLogic::WaveLogic() : currentWavePosition(0), currentWave(0), spawnTimer((float)-1), doneSpawning(false), currentLevel(0) {
 
 }
 
