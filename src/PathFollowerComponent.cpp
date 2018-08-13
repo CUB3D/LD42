@@ -14,6 +14,11 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
     int endX = curlvl.pathingNodes[this->currentNodeIndex].x;
     int endY = curlvl.pathingNodes[this->currentNodeIndex].y;
 
+
+    // Turn to face node
+    ent.angle = atan2(ent.position.y - endY, ent.position.x - endX);
+
+
     double delta = 0.16;
 
     bool atEnd = true;

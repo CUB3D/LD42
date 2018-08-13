@@ -15,16 +15,15 @@
 #include "Font.h"
 #include "Sounds.h"
 #include "TowerAiComponent.h"
+#include "Entity/AnimationRenderComponent.h"
+#include "AnimationHelper.h"
 
 
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
-//TODO: load next level when this one is done
-// TODO: moar levels
-// TODO: moar tower bases
-//TODO: fix towers / enemies
-//TODO: if cant fix then change to having all towers die at the end of the wave
+// TODO: repair packs
+//TODO: Real win/ loss screens (scott)
 
 
 
@@ -37,7 +36,7 @@ SharedVariable funds("funds", 100.0);
 SharedVariable currentWave("currentWave", 0.0);
 SharedVariable maxWave("maxWave", 0.0);
 
-int selectedTower = 0;
+int selectedTower = -1;
 double selectedCost = 20.0;
 
 UIContainer ui;
@@ -47,8 +46,9 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
         selectedTower = 0;
         selectedCost = 20.0;
     }
-    if(evnt->componentName == "Reload") {
-        this->loadLevel();
+    if(evnt->componentName == "Tower2") {
+        selectedTower = 1;
+        selectedCost = 50;
     }
     if(evnt->componentName =="NextLevel")
     {
@@ -63,32 +63,62 @@ void GameScene::onClick(MouseEvent evnt) {
     if(evnt.buttonState != PRESSED)
         return;
 
+    if(selectedTower < 0)
+        return;
+
     int x = evnt.location.x;
     int y = evnt.location.y;
     if((double)funds >= selectedCost) {
         // Find which base is being clicked
         for (auto &l : this->currentLevel.elements) {
             if(l.placed) {
-                //TODO: thunk
                 continue;
             }
+
             if (x > l.x && x < l.x + 64) {
                 if (y > l.y && y < l.y + 16) {
-                    Sounds::getSounds().build.playSingle();
+                    if(selectedTower == 0) {
+                        //TODO: less damage more health
+                        // gun
+                        auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
+                        b->angle = l.angle;
+                        this->addObject(b);
+                        // Add the tower
+                        auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
+                        a->angle = l.angle;
+                        a->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
+                            auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
+                            auto ded = ::Unknown::Loader::loadEntityAt("Entities/TurretDead.json", *scene, ent.position.x - 5, ent.position.y);
+                            //TODO: way to load from json
+                            ded->components.push_back(std::make_shared<::Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
+                            scene->addObject(ded);
+                        }));
+                        a->components.push_back(std::make_shared<TowerAiComponent>(0.4, 140));
+                        this->addObject(a);
 
-                    // gun
-                    auto b = UK_LOAD_ENTITY_AT("Entities/Tower_weapon.json", l.x - 16, l.y - 91);
-                    b->angle = l.angle;
-                    this->addObject(b);
-                    // Add the tower
-                    auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
-                    a->angle = l.angle;
-                    a->components.push_back(std::make_shared<TowerHealthBar>(b));
-                    a->components.push_back(std::make_shared<TowerAiComponent>(25,120));
-                    this->addObject(a);
-                    // Remove funds
-                    funds = (double)funds - selectedCost;
-                    l.placed = true;
+
+                        Sounds::getSounds().build.playSingle();
+
+                        // Remove funds
+                        funds = (double) funds - selectedCost;
+                        l.placed = true;
+                    }
+                    if(selectedTower == 1) {
+                        // Tesla
+                        auto b = UK_LOAD_ENTITY_AT("Entities/Tower_Tesla.json", l.x - 16, l.y - 91);
+                        //TODO: less health more damage
+                        b->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
+                        //TODO: death animation
+                        }));
+                        b->components.push_back(std::make_shared<TowerAiComponent>(0.65, 150));
+                        this->addObject(b);
+
+                        Sounds::getSounds().zap.playSingle();
+
+                        // funds
+                        funds = (double) funds - selectedCost;
+                        l.placed = true;
+                    }
                 }
             }
         }
@@ -143,6 +173,7 @@ void GameScene::loadLevel() {
     //printf("LevelString %s", currentLevel..c_str());
     //background = Image(this->currentLevel.imgPath);
     background = Image("res/Backgrounds/" + intToString(levelID) + ".png");
+
     for(levelElement& element : this->currentLevel.elements) {
         if(element.type == TowerBase) {
             auto ent = UK_LOAD_ENTITY_AT("Entities/Tower_Base.json", element.x, element.y);
@@ -166,6 +197,14 @@ void GameScene::render() const {
     for(auto& tower : getObjects<IRenderable>("TowerBody")) {
         tower->render(0, 0);
     }
+
+    // TODO: do this for destroyed ones too
+    //TODO: play death sound for ant
+    // Add moar towers
+    //TODO: dead towers dont render anymore, why?
+    //remove debug
+    //TODO: death animations
+
 
     ui.render(0, 0);
 }

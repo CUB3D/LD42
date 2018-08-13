@@ -15,7 +15,7 @@
 void AntAiComponent::update(Unknown::Entity &ent) {
     auto pathingcomp = ent.getComponent<PathFollowerComponent>();
 
-    double MAX_DIST = 100;
+    double MAX_DIST = 80;
 
     auto towers = Unknown::getUnknown()->globalSceneManager.getScene<Unknown::Scene>()->getObjects<Unknown::Entity>("TowerBody");
 
@@ -23,16 +23,18 @@ void AntAiComponent::update(Unknown::Entity &ent) {
     std::shared_ptr<Unknown::Entity> TargetObj = nullptr;
 
     for(auto& obj : towers) {
-        if(!obj->enabled)
+        auto thb = obj->getComponent<TowerHealthBar>();
+        if(!obj->enabled || !thb || thb->health <= 0)
             continue;
         // Get the component etc
-        double dist = sqrt(pow(obj->position.x - (ent.position.x + 24),2) + pow(obj->position.x - (ent.position.y - 16),2));
+        double dist = sqrt(pow(obj->position.x - (ent.position.x + 24),2) + pow(obj->position.y - (ent.position.y + 8),2));
 
         if (dist < minDist && dist < MAX_DIST) {
             minDist = dist;
             TargetObj = obj;
         }
     }
+
     if (TargetObj) {
         auto targetBar = TargetObj->getComponent<TowerHealthBar>();
         if(targetBar) {
@@ -42,8 +44,6 @@ void AntAiComponent::update(Unknown::Entity &ent) {
         }
     } else {
         pathingcomp->stopped = false;
-
-
     }
 }
 AntAiComponent::AntAiComponent(struct level leve, double rate) : curlvl(leve), rate(rate) {

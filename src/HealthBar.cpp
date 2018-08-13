@@ -7,6 +7,7 @@
 #include "Scene/Scene.h"
 #include "Loader.h"
 #include "SharedVariable.h"
+#include "Sounds.h"
 
 void HealthBar::render(const Entity &ent, double Xoffset, double Yoffset) const {
     Component::render(ent, Xoffset, Yoffset);
@@ -15,7 +16,7 @@ void HealthBar::render(const Entity &ent, double Xoffset, double Yoffset) const 
     UK_DRAW_RECT(ent.position.x, ent.position.y + offset, 25, height, Colour::RED);
     UK_DRAW_RECT(ent.position.x, ent.position.y + offset, health, height, Colour::GREEN);
 
-    ::Unknown::Graphics::drawCircle(ent.position.x + 24, ent.position.y - 16, 100, Colour::RED);
+    //::Unknown::Graphics::drawCircle(ent.position.x + 24, ent.position.y - 16, 80, Colour::RED);
 }
 
 void HealthBar::update(Entity &ent) {
@@ -24,8 +25,11 @@ void HealthBar::update(Entity &ent) {
 
         auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
         scene->addObject(::Unknown::Loader::loadEntityAt("Entities/AntDead.json", *scene, ent.position.x, ent.position.y));
+
+        Sounds::getSounds().death.playSingle();
+
         //TODO: better shared var api
-        *Unknown::getUnknown()->variablelookup["funds"] = Unknown::getUnknown()->variablelookup["funds"]->operator double() + 20;
+        *Unknown::getUnknown()->variablelookup["funds"] = Unknown::getUnknown()->variablelookup["funds"]->operator double() + 10;
     }
 }
 

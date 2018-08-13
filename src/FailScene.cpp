@@ -12,7 +12,11 @@ void FailScene::render() const {
     Scene::render();
 
     this->background.render(0, 0);
+}
 
-    if(!soundPlayed)
+void FailScene::update() {
+    if(!soundPlayed) {
         Sounds::getSounds().towerDestroy.playSingle();
+        soundPlayed = true;
+    }
 }

@@ -6,6 +6,7 @@
 #define UNKNOWN_GAME_HEALTHBAR_H
 
 #include "Entity/Component.h"
+#include "Font.h"
 
 using namespace ::Unknown;
 

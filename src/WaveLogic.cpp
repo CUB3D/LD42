@@ -9,6 +9,7 @@
 #include "AntAiComponent.h"
 #include "HealthBar.h"
 #include "GameScene.h"
+#include "Sounds.h"
 
 
 void WaveLogic::update(level level, Scene &scene) {
@@ -41,6 +42,8 @@ void WaveLogic::update(level level, Scene &scene) {
 
             if(currentWave == level.waves.size()) {
                 doneSpawning = true;
+            } else { // Play wave start for the next wave
+                Sounds::getSounds().wavestart.playSingle();
             }
         }
     }
