@@ -22,7 +22,6 @@
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
-// TODO: repair packs
 //TODO: Real win/ loss screens (scott)
 //TODO: costs below stuff
 //TODO: death animations (ant and tower)
@@ -118,7 +117,7 @@ void GameScene::onClick(MouseEvent evnt) {
                             ded->components.push_back(std::make_shared<::Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
                             scene->addObject(ded);
                         }));
-                        a->components.push_back(std::make_shared<TowerAiComponent>(0.4, 140));
+                        a->components.push_back(std::make_shared<TowerAiComponent>(0.4, 20));
                         this->addObject(a);
 
 
@@ -135,7 +134,7 @@ void GameScene::onClick(MouseEvent evnt) {
                         b->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
                         //TODO: death animation
                         }));
-                        b->components.push_back(std::make_shared<TowerAiComponent>(0.65, 150));
+                        b->components.push_back(std::make_shared<TowerAiComponent>(0.65, 30));
                         this->addObject(b);
 
                         Sounds::getSounds().zap.playSingle();

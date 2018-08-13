@@ -97,12 +97,56 @@
       0
     ]
   },
+  "T1Cost": {
+    "Type": "Image",
+    "InsideComponent": "Background",
+    "Content": "res/coin.png",
+    "Bounds": [
+      "minX+15",
+      "minY+30",
+      "maxX-20",
+      0
+    ]
+  },
+  "T1CostText": {
+    "Type": "Text",
+    "InsideComponent": "Background",
+    "Content": "20",
+    "Bounds": [
+      "minX+15",
+      "minY+10",
+      "maxX-20",
+      0
+    ]
+  },
   "T2Img": {
     "Type": "Image",
     "InsideComponent": "Background",
     "Content": "res/T2Img.png",
     "Bounds": [
       "minX+150",
+      "minY+10",
+      "maxX-20",
+      0
+    ]
+  },
+  "T2Cost": {
+    "Type": "Image",
+    "InsideComponent": "Background",
+    "Content": "res/coin.png",
+    "Bounds": [
+      "minX+130",
+      "minY+30",
+      "maxX-20",
+      0
+    ]
+  },
+  "T2CostText": {
+    "Type": "Text",
+    "InsideComponent": "Background",
+    "Content": "50",
+    "Bounds": [
+      "minX+130",
       "minY+10",
       "maxX-20",
       0
