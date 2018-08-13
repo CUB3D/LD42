@@ -50,12 +50,13 @@ void WaveLogic::update(level level, Scene &scene) {
                 //If on level2 spawn lander randomly
                 if(currentLevel == 1 && currentWave > 1) {
                     auto& nodes = level.pathingNodes;
-                    auto& node = nodes[RANDINT(0, nodes.size())];
+                    long long int pos = RANDINT(0, nodes.size());
+                    auto& node = nodes[pos];
 
 
                     auto scene = ::Unknown::getUnknown().globalSceneManager.getScene<Scene>();
                     auto ded = ::Unknown::Loader::loadEntityAt("Entities/Spawner.json", *scene, node.x, node.y - 40);
-                    ded->components.push_back(std::make_shared<LanderAIComponent>(40));
+                    ded->components.push_back(std::make_shared<LanderAIComponent>(40, pos));
                     //TODO: way to load from json
                     //ded->components.push_back(std::make_shared<::Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
                     scene->addObject(ded);

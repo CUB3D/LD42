@@ -1,5 +1,5 @@
 ## Format is Type, X, Y, angle (note first line is skipped)
-0 551 306 325
+0 551 306 0
 0 619 145 0
 0 373 165 0
 0 307 165 0

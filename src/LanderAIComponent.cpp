@@ -10,7 +10,7 @@
 #include "AntAiComponent.h"
 #include "GameScene.h"
 
-LanderAIComponent::LanderAIComponent(int decend) : decend(decend), toSpawn(3), t(1.0f) {}
+LanderAIComponent::LanderAIComponent(int decend, int currentIndex) : decend(decend), toSpawn(3), t(1.0f), curIndex(currentIndex) {}
 
 void LanderAIComponent::update(Unknown::Entity &ent) {
     Component::update(ent);
@@ -26,7 +26,9 @@ void LanderAIComponent::update(Unknown::Entity &ent) {
     // Spawn extra ants
     if(t.isTickComplete() && toSpawn > 0) {
         auto en = Loader::loadEntityAt("Entities/Ant.json", *scene, ent.position.x, ent.position.y);
-        en->components.push_back(std::make_shared<PathFollowerComponent>(scene->currentLevel));
+        auto p = std::make_shared<PathFollowerComponent>(scene->currentLevel);
+        p->currentNodeIndex = curIndex;
+        en->components.push_back(p);
         en->components.push_back(std::make_shared<HealthBar>());
         en->components.push_back(std::make_shared<AntAiComponent>(scene->currentLevel, 0.05));
         scene->addObject(en);
