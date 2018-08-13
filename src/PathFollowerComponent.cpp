@@ -7,7 +7,7 @@
 #include "SharedVariable.h"
 #include "Sounds.h"
 
-void PathFollowerComponent::update(Unknown::Entity &ent) {
+void PathFollowerComponent::update(::Unknown::Entity &ent) {
     if(stopped)
         return;
 
@@ -58,8 +58,8 @@ void PathFollowerComponent::update(Unknown::Entity &ent) {
 
             Sounds::getSounds().loss.playSingle();
 
-            *Unknown::getUnknown().variablelookup["health"] = Unknown::getUnknown().variablelookup["health"]->operator double() - 1;
-            if(Unknown::getUnknown().variablelookup["health"]->operator double() == 0) {
+            *::Unknown::getUnknown().variablelookup["health"] = ::Unknown::getUnknown().variablelookup["health"]->operator double() - 1;
+            if(::Unknown::getUnknown().variablelookup["health"]->operator double() == 0) {
                 UK_LOAD_SCENE("Fail");
             }
         }

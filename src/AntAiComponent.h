@@ -8,13 +8,13 @@
 #include "Entity/Component.h"
 #include "LevelLoader.h"
 #include "Scene/Scene.h"
-class AntAiComponent : public Unknown::Component {
+class AntAiComponent : public ::Unknown::Component {
 public:
     AntAiComponent(level currentlvl, double rate);
     double rate;
     struct level curlvl;
 
-    virtual void update(Unknown::Entity& ent) override;
+    virtual void update(::Unknown::Entity& ent) override;
 
 };
 

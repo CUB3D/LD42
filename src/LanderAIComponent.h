@@ -13,12 +13,12 @@ class LanderAIComponent : public ::Unknown::Component
 public:
     int decend;
     int toSpawn;
-    Unknown::Timer t;
+    ::Unknown::Timer t;
     int curIndex;
 
     LanderAIComponent(int decend, int currentIndex);
 
-    virtual void update(Unknown::Entity& ent);
+    virtual void update(::Unknown::Entity& ent);
 
 };
 

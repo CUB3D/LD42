@@ -8,13 +8,13 @@
 #include "Unknown.h"
 #include "Entity/Component.h"
 
-class TowerAiComponent : public Unknown::Component {
+class TowerAiComponent : public ::Unknown::Component {
 public:
     TowerAiComponent( double rate, double range);
     double rate;
     double range;
 
-    virtual void update(Unknown::Entity& ent) override;
+    virtual void update(::Unknown::Entity& ent) override;
 };
 
 

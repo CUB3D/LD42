@@ -11,7 +11,7 @@
 class MainMenuScene : public ::Unknown::MenuScene
 {
 public:
-    MainMenuScene(std::shared_ptr<Unknown::Graphics::TTFont> font);
+    MainMenuScene(std::shared_ptr<::Unknown::Graphics::TTFont> font);
 };
 
 

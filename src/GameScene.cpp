@@ -158,7 +158,7 @@ GameScene::GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font) : Scene(
         if(!e.edit)
             return;
 
-        Unknown::Point<int> pos;
+        ::Unknown::Point<int> pos;
         UK_GET_MOUSE_POS(pos);
 
         printf("%d,%d\n", pos.x, pos.y);
@@ -244,7 +244,7 @@ void GameScene::update() {
     maxWave = (double) (currentLevel.waves.size() - 1);
 
     bool allAntsDead = true;
-    for(auto& ant : this->getObjects<Unknown::Entity>("Ant")) {
+    for(auto& ant : this->getObjects<::Unknown::Entity>("Ant")) {
         if(ant->enabled) {
             allAntsDead = false;
             break;

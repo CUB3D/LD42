@@ -11,8 +11,8 @@
 class WinScene : public ::Unknown::Scene
 {
 public:
-    Unknown::Graphics::Image img;
-    Unknown::Timer timer;
+    ::Unknown::Graphics::Image img;
+    ::Unknown::Timer timer;
 
     WinScene();
 

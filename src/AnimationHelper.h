@@ -13,7 +13,7 @@ private:
     AnimationHelper() = default;
 
 public:
-    static Unknown::Graphics::Animation getExplodeAnimation();
+    static ::Unknown::Graphics::Animation getExplodeAnimation();
 };
 
 

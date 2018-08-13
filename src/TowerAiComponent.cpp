@@ -9,12 +9,12 @@
 #include "Scene/Scene.h"
 #include <Entity/Entity.h>
 
-void TowerAiComponent::update(Unknown::Entity &ent)
+void TowerAiComponent::update(::Unknown::Entity &ent)
 {
-    auto ants = Unknown::getUnknown().globalSceneManager.getScene<Unknown::Scene>()->getObjects<Unknown::Entity>("Ant");
+    auto ants = ::Unknown::getUnknown().globalSceneManager.getScene<::Unknown::Scene>()->getObjects<::Unknown::Entity>("Ant");
 
     double minDist(99999);
-    std::shared_ptr<Unknown::Entity> TargetObj;
+    std::shared_ptr<::Unknown::Entity> TargetObj;
 
     for(auto& obj : ants) {
         if(!obj->enabled)

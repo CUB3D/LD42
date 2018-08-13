@@ -8,7 +8,7 @@
 #include "Entity/Component.h"
 #include "LevelLoader.h"
 
-class PathFollowerComponent : public Unknown::Component {
+class PathFollowerComponent : public ::Unknown::Component {
 public:
     PathFollowerComponent(level currentlvl);
 
@@ -17,7 +17,7 @@ public:
     double speed = 10;
     bool stopped;
 
-    virtual void update(Unknown::Entity& ent) override;
+    virtual void update(::Unknown::Entity& ent) override;
 
 };
 

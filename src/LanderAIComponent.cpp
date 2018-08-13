@@ -12,7 +12,7 @@
 
 LanderAIComponent::LanderAIComponent(int decend, int currentIndex) : decend(decend), toSpawn(3), t(1.0f), curIndex(currentIndex) {}
 
-void LanderAIComponent::update(Unknown::Entity &ent) {
+void LanderAIComponent::update(::Unknown::Entity &ent) {
     Component::update(ent);
 
     if(decend > 0) {

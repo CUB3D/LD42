@@ -15,14 +15,14 @@
 
 #include "Font.h"
 
-std::shared_ptr<Unknown::Graphics::TTFont> font;
-std::shared_ptr<Unknown::Graphics::TTFont> mainMenuFont;
+std::shared_ptr<::Unknown::Graphics::TTFont> font;
+std::shared_ptr<::Unknown::Graphics::TTFont> mainMenuFont;
 
 
 void init() {
-    font = std::make_shared<Unknown::Graphics::TTFont>("res/Fonts/Arimo-Regular.ttf", 15, UK_COLOUR_RGB(0, 0, 0));
+    font = std::make_shared<::Unknown::Graphics::TTFont>("res/Fonts/Arimo-Regular.ttf", 15, UK_COLOUR_RGB(0, 0, 0));
     //TODO: why do fonts have both a fixed size and colour, just cache it somewhere
-    mainMenuFont = std::make_shared<Unknown::Graphics::TTFont>("res/Fonts/Arimo-Regular.ttf", 30, UK_COLOUR_RGB(0, 0, 0));
+    mainMenuFont = std::make_shared<::Unknown::Graphics::TTFont>("res/Fonts/Arimo-Regular.ttf", 30, UK_COLOUR_RGB(0, 0, 0));
 
     UK_ADD_SCENE(std::make_shared<InstructionsScene>());
     UK_ADD_SCENE(std::make_shared<MainMenuScene>(mainMenuFont));

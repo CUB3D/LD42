@@ -11,7 +11,7 @@
 class TowerHealthBar : public HealthBar
 {
 public:
-    std::shared_ptr<Unknown::Entity> turret;
+    std::shared_ptr<::Unknown::Entity> turret;
     std::function<void(Entity& ent)> func;
 
     TowerHealthBar(std::shared_ptr<Entity> turret, std::function<void(Entity& ent)> func);

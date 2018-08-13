@@ -29,7 +29,7 @@ void HealthBar::update(Entity &ent) {
         Sounds::getSounds().death.playSingle();
 
         //TODO: better shared var api
-        *Unknown::getUnknown().variablelookup["funds"] = Unknown::getUnknown().variablelookup["funds"]->operator double() + 10;
+        *::Unknown::getUnknown().variablelookup["funds"] = ::Unknown::getUnknown().variablelookup["funds"]->operator double() + 10;
     }
 }
 

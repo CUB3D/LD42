@@ -15,7 +15,7 @@ public:
     Editor e;
     WaveLogic logic;
 
-	GameScene(std::shared_ptr<Unknown::Graphics::TTFont> font);
+	GameScene(std::shared_ptr<::Unknown::Graphics::TTFont> font);
 
 	virtual void render() const override;
 	virtual void update() override;
@@ -23,8 +23,8 @@ public:
 	void advanceLevel();
 
 	void loadLevel();
-	void uiCallback(std::shared_ptr<Unknown::UIEvent> evt);
-	void onClick(Unknown::MouseEvent evnt);
+	void uiCallback(std::shared_ptr<::Unknown::UIEvent> evt);
+	void onClick(::Unknown::MouseEvent evnt);
 };
 
 #endif

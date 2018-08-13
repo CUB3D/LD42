@@ -14,7 +14,7 @@ public:
     InstructionsScene();
 
     virtual void render() const;
-    void onMouseEvent(Unknown::MouseEvent evnt);
+    void onMouseEvent(::Unknown::MouseEvent evnt);
 };
 
 
