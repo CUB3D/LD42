@@ -1,0 +1,18 @@
+{
+  "Tag": "Ground",
+  "X": 17,
+  "Y": 23,
+  "Width": 35,
+  "Height": 10,
+  "Components": {
+    "BRender": {
+      "Type": "BasicRenderer",
+      "Colour": "00FF00",
+      "RenderScale": 32
+    },
+    "Collider": {
+      "Type": "Collider",
+      "ColliderType": "Static"
+    }
+  }
+}

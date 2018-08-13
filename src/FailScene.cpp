@@ -5,7 +5,7 @@
 #include "FailScene.h"
 #include "Sounds.h"
 
-FailScene::FailScene() : Scene("Fail"), background("res/isthisloss.png"), soundPlayed(false) {
+FailScene::FailScene() : Scene("Fail"), background("res/Lose Screen.png"), soundPlayed(false) {
 }
 
 void FailScene::render() const {

@@ -29,7 +29,7 @@ void init() {
     UK_ADD_SCENE(std::make_shared<WinScene>());
 	UK_ADD_SCENE(std::make_shared<GameScene>(font));
 	UK_ADD_SCENE(std::make_shared<FailScene>());
-	UK_LOAD_SCENE("MainMenu");
+	UK_LOAD_SCENE("Win");
 }
 
 #ifdef _WIN32

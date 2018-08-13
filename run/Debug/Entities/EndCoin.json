@@ -1,0 +1,12 @@
+{
+  "Tag": "EndCoin",
+  "Width": 0.5,
+  "Height":  0.5,
+  "Components": {
+    "BRender": {
+      "Type": "ImageRenderer",
+      "File": "res/coin.png",
+      "RenderScale": 32
+    }
+  }
+}
