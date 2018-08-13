@@ -22,10 +22,7 @@
 using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
-//TODO: Real win/ loss screens (scott)
-//TODO: death animations (ant and tower)
 //TODO: ants with powerups (+ health/extra money when killed)
-//TODO: fix sprite offsets
 int levelID = 1;
 
 Image background("res/Backgrounds/1.png");
