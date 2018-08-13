@@ -4,7 +4,7 @@
 
 #include "WinScene.h"
 
-WinScene::WinScene() : Scene("Win"), img("res/Tower.png") {
+WinScene::WinScene() : Scene("Win"), img("res/crappy win screen.png") {
 
 }
 
