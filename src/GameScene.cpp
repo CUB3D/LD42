@@ -23,9 +23,11 @@ using namespace ::Unknown;
 using namespace ::Unknown::Graphics;
 
 //TODO: Real win/ loss screens (scott)
-//TODO: costs below stuff
 //TODO: death animations (ant and tower)
 //TODO Ants dont take damage on lvl 2
+//TODO: ants with powerups (+ health/extra money when killed)
+//TODO: alien landings (extra spawners
+//Intro explanation screen
 
 int levelID = 1;
 
@@ -69,7 +71,6 @@ void GameScene::onClick(MouseEvent evnt) {
     int x = evnt.location.x;
     int y = evnt.location.y;
 
-    // TODO: out of mon sound
     if((double)funds >= selectedCost) {
         // Find which base is being clicked
 
@@ -112,7 +113,7 @@ void GameScene::onClick(MouseEvent evnt) {
                         auto a = UK_LOAD_ENTITY_AT("Entities/Tower_Body.json", l.x, l.y - 91);
                         a->angle = l.angle;
                         a->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
-                            auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
+                            auto scene = ::Unknown::getUnknown().globalSceneManager.getScene<Scene>();
                             auto ded = ::Unknown::Loader::loadEntityAt("Entities/TurretDead.json", *scene, ent.position.x - 5, ent.position.y);
                             //TODO: way to load from json
                             ded->components.push_back(std::make_shared<::Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
@@ -208,6 +209,10 @@ void GameScene::loadLevel() {
     }
 
     this->logic.reset();
+
+    health = (double) 10;
+    funds = (double) 100;
+    currentWave = (double) 0;
 }
 
 void GameScene::render() const {

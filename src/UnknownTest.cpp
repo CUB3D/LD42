@@ -11,6 +11,7 @@
 #include "FailScene.h"
 #include "WinScene.h"
 #include "MainMenuScene.h"
+#include "InstructionsScene.h"
 
 #include "Font.h"
 
@@ -23,6 +24,7 @@ void init() {
     //TODO: why do fonts have both a fixed size and colour, just cache it somewhere
     mainMenuFont = std::make_shared<Unknown::Graphics::TTFont>("res/Fonts/Arimo-Regular.ttf", 30, UK_COLOUR_RGB(0, 0, 0));
 
+    UK_ADD_SCENE(std::make_shared<InstructionsScene>());
     UK_ADD_SCENE(std::make_shared<MainMenuScene>(mainMenuFont));
     UK_ADD_SCENE(std::make_shared<WinScene>());
 	UK_ADD_SCENE(std::make_shared<GameScene>(font));

@@ -6,11 +6,11 @@
 
 void ui(std::shared_ptr<Unknown::UIEvent> evt) {
     if(evt->componentName == "PlayButton") {
-        UK_LOAD_SCENE("Game");
+        UK_LOAD_SCENE("Instruction");
     }
 
     if(evt->componentName == "QuitButton") {
-        Unknown::getUnknown()->quit(0);
+        Unknown::getUnknown().quit(0);
     }
 
     UK_REMOVE_UI_LISTENER("mainmenu");

@@ -17,7 +17,7 @@ void AntAiComponent::update(Unknown::Entity &ent) {
 
     double MAX_DIST = 80;
 
-    auto towers = Unknown::getUnknown()->globalSceneManager.getScene<Unknown::Scene>()->getObjects<Unknown::Entity>("TowerBody");
+    auto towers = Unknown::getUnknown().globalSceneManager.getScene<Unknown::Scene>()->getObjects<Unknown::Entity>("TowerBody");
 
     double minDist(99999);
     std::shared_ptr<Unknown::Entity> TargetObj = nullptr;

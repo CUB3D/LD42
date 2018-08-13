@@ -23,13 +23,13 @@ void HealthBar::update(Entity &ent) {
     if(this->health <= 0) {
         ent.queueDisable();
 
-        auto scene = ::Unknown::getUnknown()->globalSceneManager.getScene<Scene>();
+        auto scene = ::Unknown::getUnknown().globalSceneManager.getScene<Scene>();
         scene->addObject(::Unknown::Loader::loadEntityAt("Entities/AntDead.json", *scene, ent.position.x, ent.position.y));
 
         Sounds::getSounds().death.playSingle();
 
         //TODO: better shared var api
-        *Unknown::getUnknown()->variablelookup["funds"] = Unknown::getUnknown()->variablelookup["funds"]->operator double() + 10;
+        *Unknown::getUnknown().variablelookup["funds"] = Unknown::getUnknown().variablelookup["funds"]->operator double() + 10;
     }
 }
 
