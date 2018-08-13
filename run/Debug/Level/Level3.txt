@@ -1,0 +1,32 @@
+## Format is Type, X, Y, angle (note first line is skipped)
+
+### Wave info format is count,delay(ms)
+3 200
+0 10000
+5 200
+0 10000
+10 300
+### Spawn pos
+0 95
+### Pathing nodes (x, y, angle)
+195 97 0
+384 -96 0
+571 -91 0
+576 169 0
+-383 173 0
+-194 -170 0
+-13 171 0
+20 240 0
+190 240 0
+377 240 0
+576 247 0
+579 316 0
+-381 318 0
+-197 319 0
+-21 320 0
+-12 390 0
+168 -386 0
+366 392 0
+539 393 0
+### Background
+res/Debug/3.png
