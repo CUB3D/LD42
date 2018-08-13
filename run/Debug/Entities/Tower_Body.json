@@ -5,7 +5,7 @@
   "Components": {
     "BRender": {
       "Type": "ImageRenderer",
-      "File": "res/turret.png"
+      "File": "res/NewTurret.png"
     }
   }
 }
