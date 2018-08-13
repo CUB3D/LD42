@@ -239,7 +239,7 @@ void GameScene::advanceLevel() {
     levelID++;
 
     //TODO: update this to represent the end
-    if(levelID == 3) {
+    if(levelID == 4) {
         UK_LOAD_SCENE("Win");
         return;
     }
