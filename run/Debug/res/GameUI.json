@@ -10,12 +10,6 @@
     "Content": "Gun Turret",
     "Bounds": ["minX+10", "minY+50", 100, 25]
   },
-  "NextLevel": {
-    "Type": "Button",
-    "InsideComponent": "Background",
-    "Content": "Next Level",
-    "Bounds": ["minX+250", "minY+10",100,25]
-  },
   "HeartImg": {
     "Type": "Image",
     "InsideComponent": "Background",
@@ -163,5 +157,27 @@
     "InsideComponent": "Background",
     "Content": "Repair",
     "Bounds": ["minX+250", "minY+50", 100, 25]
+  },
+  "RCost": {
+    "Type": "Image",
+    "InsideComponent": "Background",
+    "Content": "res/coin.png",
+    "Bounds": [
+      "minX+260",
+      "minY+30",
+      "maxX-20",
+      0
+    ]
+  },
+  "RCostText": {
+    "Type": "Text",
+    "InsideComponent": "Background",
+    "Content": "100",
+    "Bounds": [
+      "minX+260",
+      "minY+10",
+      "maxX-20",
+      0
+    ]
   }
 }

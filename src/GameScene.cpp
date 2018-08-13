@@ -25,6 +25,7 @@ using namespace ::Unknown::Graphics;
 //TODO: Real win/ loss screens (scott)
 //TODO: costs below stuff
 //TODO: death animations (ant and tower)
+//TODO Ants dont take damage on lvl 2
 
 int levelID = 1;
 
@@ -53,10 +54,6 @@ void GameScene::uiCallback(std::shared_ptr<UIEvent> evnt) {
         selectedTower = 2;
         selectedCost = 100;
     }
-    if(evnt->componentName =="NextLevel")
-    {
-        this->advanceLevel();
-    }
 
     printf("%d\n", selectedTower);
 }
@@ -79,17 +76,21 @@ void GameScene::onClick(MouseEvent evnt) {
         if(selectedTower == 2) { // repair
             for(auto& l : this->getObjects<Entity>("TowerBody")) {
                 auto hb = l->getComponent<TowerHealthBar>();
-                if(!hb)
-                    continue;
-                if(hb->health < 25 && hb->health > 0) {
-                    hb->health = 25;
+                if (x > l->position.x && x < l->position.x + 64) {
+                    if (y > l->position.y && y < l->position.y + 96) {
+                        if (!hb)
+                            continue;
+                        if (hb->health < 25 && hb->health > 0) {
+                            hb->health = 25;
 
-                    // Repair sound
-                    Sounds::getSounds().repair.playSingle();
+                            // Repair sound
+                            Sounds::getSounds().repair.playSingle();
 
-                    funds = (double) funds - selectedCost;
+                            funds = (double) funds - selectedCost;
 
-                    continue;
+                            return;
+                        }
+                    }
                 }
             }
         }
@@ -117,7 +118,7 @@ void GameScene::onClick(MouseEvent evnt) {
                             ded->components.push_back(std::make_shared<::Unknown::AnimationRenderComponent>(AnimationHelper::getExplodeAnimation()));
                             scene->addObject(ded);
                         }));
-                        a->components.push_back(std::make_shared<TowerAiComponent>(0.4, 20));
+                        a->components.push_back(std::make_shared<TowerAiComponent>(0.4, 85));
                         this->addObject(a);
 
 
@@ -134,7 +135,7 @@ void GameScene::onClick(MouseEvent evnt) {
                         b->components.push_back(std::make_shared<TowerHealthBar>(b, [](Entity& ent) {
                         //TODO: death animation
                         }));
-                        b->components.push_back(std::make_shared<TowerAiComponent>(0.65, 30));
+                        b->components.push_back(std::make_shared<TowerAiComponent>(0.65, 85));
                         this->addObject(b);
 
                         Sounds::getSounds().zap.playSingle();
@@ -238,8 +239,8 @@ void GameScene::update() {
 
     logic.update(currentLevel, *this);
 
-    currentWave = (double) (logic.currentWave + 1);
-    maxWave = (double) currentLevel.waves.size();
+    currentWave = (double) (logic.currentWave);
+    maxWave = (double) (currentLevel.waves.size() - 1);
 
     bool allAntsDead = true;
     for(auto& ant : this->getObjects<Unknown::Entity>("Ant")) {
